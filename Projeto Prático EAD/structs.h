@@ -48,3 +48,4 @@ Clientes* remover_clientes(Clientes* inicio, int code); //Remove um cliente atra
 Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[]); // Inserção de novos veiculos
 Veiculos* imprimir_veiculos(Veiculos* inicio); //Imprimie os veiculos disponiveis
 Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]); //Inserção dos gestores
+int Reservar_Veiculo(Veiculos* inicio, Clientes* inicio1, int NIF_reserva);

@@ -1,0 +1,4 @@
+1904;58;Santo Tirso~;1;sfbklfn;1;180409174
+147258369;75;Refojos;2;Bicicleta Velha;1;180409174
+987654321;45;Porto;8;Bicicleta;0;0
+123456789;68;Santo Tirso;4;Board;1;180409174

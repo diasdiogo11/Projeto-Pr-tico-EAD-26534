@@ -190,6 +190,8 @@ void saldo(Clientes* inicio, int NIF_procurado){
 		
 		
 }
+
+
 	
 }
 int login_gestores(Gestores* inicio, char* username, char* password) {
@@ -401,12 +403,13 @@ int verificar_registo(Clientes* inicio, int NIF) {
 
 	for (inicio; inicio != NULL; inicio = inicio->proximo_cliente) {
 		if (inicio->NIF == NIF) {
-			return 1;
-		}
-		else {
 			return 0;
 		}
+		
+			
+		
 	}
+	return 1;
 }
 
 void AlterarNome(Clientes* inicio, int NIF_procurado) {
@@ -445,34 +448,6 @@ void AlterarMorada(Clientes* inicio, int NIF_procurado) {
 
 }
 
-int Reservar_Veiculo(Veiculos* inicio,Clientes* inicio1,int NIF_reserva) {
-
-	int code;
-	char opcao[50];
-
-	printf("Que veiculo deseja alugar?\n");
-	scanf("%d", &code);
-
-	Veiculos* current = inicio;
-	Clientes* current1 = inicio1;
-
-	for (current; current != NULL; current = current->proximo_veiculo) {
-		for (current1; current1 != NULL; current1 = current1->proximo_cliente) {
-			if (current->codigo == code && current->NIF_reserva == 0 && current->reserva == 0 && current1->NIF == NIF_reserva) {
-				printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
-				current->reserva = 1;
-				current->NIF_reserva = NIF_reserva;
-				return 1;
-			}
-			
-
-		}
-		
-		return 0;
-		
-		
-	}
-}
 
 void Historico_Reservas(Veiculos* inicio, int NIF_reserva) {
 
@@ -490,7 +465,36 @@ void Historico_Reservas(Veiculos* inicio, int NIF_reserva) {
 	}
 }
 
-void Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
+int Reservar_Veiculo(Veiculos* inicio, Clientes* inicio1, int NIF_reserva) {
+
+	int code;
+	char opcao[50];
+
+	printf("Que veiculo deseja alugar?\n");
+	scanf("%d", &code);
+
+	Veiculos* current = inicio;
+	Clientes* current1 = inicio1;
+
+	for (current; current != NULL; current = current->proximo_veiculo) {
+		for (current1; current1 != NULL; current1 = current1->proximo_cliente) {
+			if (current->codigo == code && current->NIF_reserva == 0 && current->reserva == 0) {
+				printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+				current->reserva = 1;
+				current->NIF_reserva = NIF_reserva;
+				return 1;
+			}
+
+
+		}
+
+		return 0;
+
+
+	}
+}
+
+int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 
 	int code;
 	
@@ -504,9 +508,11 @@ void Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
 			current->reserva = 0;
 			current->NIF_reserva = 0;
+			return 1;
 		}
 		else if (current->reserva == 0 && current->NIF_reserva == NIF_reserva) {
 			printf("Veiculo disponivel\n");
+			return 0;
 		}
 	}
 }
