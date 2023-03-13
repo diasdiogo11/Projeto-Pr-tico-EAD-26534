@@ -204,7 +204,7 @@ int login_gestores(Gestores* inicio, char* username, char* password) {
 	return 0;
 }
 
-int login_clientes(Clientes* inicio, char* username, int* code) {
+int login_clientes(Clientes* inicio, char* username, int* code[]) {
 	Clientes* current = inicio;
 	for (current; current != NULL; current = current->proximo_cliente) {
 		if (strcmp(current->nome, username) == 0 && code == current->NIF) {
