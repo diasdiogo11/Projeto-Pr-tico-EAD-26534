@@ -1,0 +1,3 @@
+1234;Diogo ;19;Rua das Mos;1250
+1111;Diogo Dias;18;Rua do Peso;0
+2222;Joao;257;ueef;0
