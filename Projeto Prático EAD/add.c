@@ -259,7 +259,7 @@ void ordenação_clientes(Clientes* inicio) {
 void GuardarVeiculos(Veiculos* inicio)
 {
 	FILE* fp;
-	fp = fopen("Veiculos.txt", "w");
+	fp = fopen("Veiculos.txt", "a");
 	if (fp != NULL)
 	{
 		Veiculos* aux = inicio;
@@ -271,7 +271,7 @@ void GuardarVeiculos(Veiculos* inicio)
 
 
 	}
-	else return(0);
+
 }
 
 Veiculos* LerVeiculos() {
@@ -284,12 +284,49 @@ Veiculos* LerVeiculos() {
 	{
 		while (!feof(fp))
 		{
-			fscanf(fp, "%d;%d;%[^;];%d;%[^;];%d;%d\n", &code, &bat, loca, &cust, tipo, &reserva,&NIF_reserva);
-			aux = inserir_veiculos(aux, code, bat, loca, cust, tipo,reserva,NIF_reserva);
+			fscanf(fp, "%d;%d;%[^;];%d;%[^;];%d;%d\n", &code, &bat, loca, &cust, tipo, &reserva, &NIF_reserva);
+			aux = inserir_veiculos(aux, code, bat, loca, cust, tipo, reserva, NIF_reserva);
 		}
 		fclose(fp);
 	}
 	return(aux);
+}
+
+
+void GuardarVeiculos_Binario(Veiculos* inicio)
+{
+	FILE* fp;
+	fp = fopen("Veiculos.bin", "wb");
+	if (fp != NULL)
+	{
+		Veiculos* aux = inicio;
+		while (aux != NULL)
+		{
+			fwrite(aux, sizeof(Veiculos), 1, fp);
+			aux = aux->proximo_veiculo;
+		}
+		fclose(fp);
+	}
+}
+
+
+Veiculos* LerVeiculos_Binario()
+{
+	FILE* fp;
+	Veiculos* aux = NULL;
+	fp = fopen("Veiculos.bin", "rb");
+
+	if (fp != NULL)
+	{
+		Veiculos current;
+		while (fread(&current, sizeof(Veiculos), 1, fp) == 1)
+		{
+			aux = inserir_veiculos(aux, current.codigo, current.bateria, current.localizacao, current.custo, current.tipo, current.reserva, current.NIF_reserva);
+		}
+		fclose(fp);
+	}
+	return aux;
+
 }
 
 void GuardarClientes(Clientes* inicio)
@@ -309,6 +346,25 @@ void GuardarClientes(Clientes* inicio)
 	
 }
 
+Clientes* LerClientes()
+{
+	FILE* fp;
+	int NIF, idade, saldo;
+	char nome[50], morada[50];
+	Clientes* aux = NULL;
+	fp = fopen("Clientes.txt", "r");
+	if (fp != NULL)
+	{
+		while (!feof(fp))
+		{
+			fscanf(fp, "%d;%[^;];%d;%[^;];%d\n", &NIF, nome, &idade, morada, &saldo);
+			aux = inserir_cliente(aux, NIF, nome, idade, morada, saldo);
+		}
+		fclose(fp);
+	}
+	return(aux);
+}
+
 void GuardarClientes_Binario(Clientes* inicio)
 {
 	FILE* fp;
@@ -318,7 +374,7 @@ void GuardarClientes_Binario(Clientes* inicio)
 		Clientes* aux = inicio;
 		while (aux != NULL)
 		{
-			fwrite(aux, sizeof(Clientes), 2, fp);
+			fwrite(aux, sizeof(Clientes), 1, fp);
 			aux = aux->proximo_cliente;
 		}
 		fclose(fp);
@@ -328,43 +384,22 @@ void GuardarClientes_Binario(Clientes* inicio)
 Clientes* LerClientes_Binario()
 {
 	FILE* fp;
-	int NIF, idade, saldo;
-	char nome[50], morada[50];
 	Clientes* aux = NULL;
 	fp = fopen("Clientes.bin", "rb");
-	
-		if (fp != NULL)
-		{
-			Clientes current;
-			while (fread(&current, sizeof(Clientes), 1, fp) == 1)
-			{
-				aux = inserir_cliente(aux, current.NIF,current.nome, current.idade, current.morada, current.saldo);
-			}
-			fclose(fp);
-		}
-		return aux;
-	
-}
 
-
-Clientes* LerClientes()
-{
-	FILE* fp;
-	int NIF,idade,saldo;
-	char nome[50], morada[50];
-	Clientes* aux = NULL;
-	fp = fopen("Clientes.txt", "r");
 	if (fp != NULL)
 	{
-		while (!feof(fp))
+		Clientes current;
+		while (fread(&current, sizeof(Clientes), 1, fp) == 1)
 		{
-			fscanf(fp,  "%d;%[^;];%d;%[^;];%d\n", &NIF, nome, &idade, morada, &saldo);
-			aux = inserir_cliente(aux, NIF, nome, idade, morada, saldo);
+			aux = inserir_cliente(aux, current.NIF, current.nome, current.idade, current.morada, current.saldo);
 		}
 		fclose(fp);
 	}
-	return(aux);
+	return aux;
+
 }
+
 
 void menu_principal() {
 	int opcao;

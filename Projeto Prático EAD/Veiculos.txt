@@ -1,11 +1,5 @@
-54;45;tyfyyk;445;uyfk;0;0
-1234;45;iuhh‡;5;uyggil;0;0
-8;45;rgrdhdh;4;drhdrh;1;0
-4;45;afaf;4;afaf;1;1234
-3;45;awfafw;5;awfaf;1;1234
-1;45;aifugihfs;5;awfaf;1;1111
-2;54;afafw;5;awfaf;1;4444
-10;54;uyefgiuef;12;esgseg;1;366427392
-9;65;s;6;esgseges;1;1470250160
-1111;100;hhkjfjk;4;ukggk;0;0
-7777;100;hjj;5;ghdjhfm;1;4444
+1234;45;esgsg;5;segsgs;0;0
+7777;45;segsgsg;4;segsg;1;2004
+8888;45;segsegsg;8;segsgse;0;0
+7777;45;segsgsg;4;segsg;1;1234
+1234;45;esgsg;5;segsgs;0;0
