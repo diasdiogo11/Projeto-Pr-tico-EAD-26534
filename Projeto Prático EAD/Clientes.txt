@@ -1,6 +1,0 @@
-1111;Diogo;20;esgsegsg;0
-1234;Diogo;19;uyfhf;0
-1234;Jonas;15;Rua da Liberdade;10015
-180409174;Diogo Dias;19;Rua das Mos;20
-174785927;Diogo Dias;19;Rua do Peso;20
-1234;Diogo;18;esgsg;0

@@ -21,7 +21,8 @@ void main() {
 
 
 
-	clientes = LerClientes();
+
+	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos();
 	imprimir_clientes(clientes);
 	gestores = inserir_gestores(gestores, "diogo", "lesi");
@@ -31,7 +32,7 @@ void main() {
 
 
 	do {
-		clientes = LerClientes();
+		clientes = LerClientes_Binario();
 		menu_principal();
 		scanf("%d", &opcao);
 		
@@ -51,7 +52,7 @@ void main() {
 				printf("Morada:\n");
 				gets(morada);
 				clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
-				GuardarClientes(clientes);
+				GuardarClientes_Binario(clientes);
 			}
 			else {
 				printf("Utilizador ja se encontra registado\n");
@@ -84,16 +85,23 @@ void main() {
 							if (opcao2 == 1) {
 								printf("NIF:\n");
 								scanf("%d", &NIF);
-								scanf("%*c");
-								printf("Nome:\n");
-								gets(nome);
-								printf("Idade:\n");
-								scanf("%d", &idade);
-								scanf("%*c");
-								printf("Morada:\n");
-								gets(morada);
-								clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
-								GuardarClientes(clientes);
+								if (verificar_registo(clientes, NIF)) {
+									scanf("%*c");
+									printf("Nome:\n");
+									gets(nome);
+									printf("Idade:\n");
+									scanf("%d", &idade);
+									scanf("%*c");
+									printf("Morada:\n");
+									gets(morada);
+									clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
+									GuardarClientes_Binario(clientes);
+									
+								}
+								else {
+									printf("Utilizador ja se encontra registado\n");
+								}
+								
 
 
 							}
@@ -102,7 +110,7 @@ void main() {
 								printf("NIF do utilizador a remover do sistema\n");
 								scanf("%d", &NIF_);
 								clientes = remover_clientes(clientes, NIF_);
-								GuardarClientes(clientes);
+								GuardarClientes_Binario(clientes);
 							}
 							else if (opcao2 == 3) {
 
@@ -128,11 +136,15 @@ void main() {
 
 							}
 							else if (opcao2 == 5) {
-								printf("NIF do utilizador a remover do sistema\n");
+								printf("Codigo do meio a remover do sistema\n");
 								scanf("%d", &NIF_);
 								veiculos = remover_veiculos(veiculos, NIF_);
 								GuardarVeiculos(veiculos);
 
+							}
+							else if (opcao2 == 6) {
+								ordenação_veiculos(veiculos);
+								imprimir_veiculos(veiculos);
 							}
 						} while (opcao2 != 0);
 						
@@ -156,20 +168,22 @@ void main() {
 					if (login_clientes(clientes, usuario, NIF)) {
 						printf("Bem vindo %s\n", usuario);
 						do {
-							clientes = LerClientes();
-							veiculos = LerVeiculos();
 							menu_clientes();
 							scanf("%d", &opcao3);
 							if (opcao3 == 1) {
-								veiculos = LerVeiculos();
-								clientes = LerClientes();
-								if (Reservar_Veiculo(veiculos, clientes, NIF)) {
+
+								ordenação_veiculos(veiculos);
+								imprimir_veiculos(veiculos);
+
+
+								if (Reservar_Veiculo(veiculos,NIF)) {
+									printf("Reserva bem sucedida\n");
 									GuardarVeiculos(veiculos);
 								}
 								else {
-									printf("Veiculo impossivel de reservar\n");
-								}
+									printf("Veiculo indisponivel\n");
 
+								}
 
 							}
 							else if (opcao3 == 2) {
@@ -182,8 +196,8 @@ void main() {
 							}
 							else if (opcao3 == 3) {
 
-								saldo(clientes, NIF);
-								GuardarClientes(clientes);
+								clientes = saldo(clientes, NIF);
+								GuardarClientes_Binario(clientes);
 								imprimir_clientes(clientes);
 
 							}
@@ -193,12 +207,12 @@ void main() {
 								scanf("%d", &opcao1);
 								if (opcao1 == 1) {
 									AlterarNome(clientes, NIF);
-									GuardarClientes(clientes);
+									GuardarClientes_Binario(clientes);
 									imprimir_clientes(clientes);
 								}
 								else if (opcao1 == 2) {
 									AlterarMorada(clientes, NIF);
-									GuardarClientes(clientes);
+									GuardarClientes_Binario(clientes);
 									clientes = imprimir_clientes(clientes);
 								}
 							}

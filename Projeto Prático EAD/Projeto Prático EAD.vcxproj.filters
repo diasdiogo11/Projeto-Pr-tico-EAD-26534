@@ -23,10 +23,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="structs.h">
+    <ClInclude Include="add.c">
       <Filter>Arquivos de Origem</Filter>
     </ClInclude>
-    <ClInclude Include="add.c">
+    <ClInclude Include="structs.h">
       <Filter>Arquivos de Origem</Filter>
     </ClInclude>
   </ItemGroup>

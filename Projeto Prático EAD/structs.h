@@ -7,7 +7,7 @@
 
 
 
-typedef struct registo_clientes{
+typedef struct registo_clientes {
 
 	int idade;
 	int NIF;
@@ -19,7 +19,7 @@ typedef struct registo_clientes{
 
 }Clientes;
 
-typedef struct registo_gestores{
+typedef struct registo_gestores {
 
 	char email[50];
 	char password[50];
