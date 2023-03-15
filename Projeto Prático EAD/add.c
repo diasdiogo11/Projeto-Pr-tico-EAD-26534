@@ -259,7 +259,7 @@ void ordenação_clientes(Clientes* inicio) {
 void GuardarVeiculos(Veiculos* inicio)
 {
 	FILE* fp;
-	fp = fopen("Veiculos.txt", "a");
+	fp = fopen("Veiculos.txt", "w");
 	if (fp != NULL)
 	{
 		Veiculos* aux = inicio;
@@ -399,6 +399,43 @@ Clientes* LerClientes_Binario()
 	return aux;
 
 }
+
+void Historico_binario(Veiculos* inicio)
+{
+	FILE* fp;
+	fp = fopen("Reservas.bin", "ab");
+	if (fp != NULL)
+	{
+		Veiculos* aux = inicio;
+		while (aux != NULL)
+		{
+			fwrite(aux, sizeof(Veiculos), 1, fp);
+			aux = aux->proximo_veiculo;
+		}
+		fclose(fp);
+	}
+}
+
+void Historico(Veiculos* inicio)
+{
+	FILE* fp;
+	fp = fopen("Reservas.txt", "a");
+	if (fp != NULL)
+	{
+		Veiculos* aux = inicio;
+		for (aux; aux != NULL; aux = aux->proximo_veiculo) {
+			fprintf(fp, "%d;%d;%s;%d;%s;%d;%d\n", aux->codigo, aux->bateria,
+				aux->localizacao, aux->custo, aux->tipo, aux->reserva, aux->NIF_reserva);
+		}
+		fclose(fp);
+
+
+	}
+
+}
+
+
+
 
 
 void menu_principal() {
@@ -584,6 +621,8 @@ int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 		}
 	}
 }
+
+
 
 void clear() {
 

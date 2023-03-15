@@ -49,3 +49,4 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 Veiculos* imprimir_veiculos(Veiculos* inicio); //Imprimie os veiculos disponiveis
 Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]); //Inserção dos gestores
 int Reservar_Veiculo(Veiculos* inicio, Clientes* inicio1, int NIF_reserva);
+void Historico_reservas(Veiculos* inicio);

@@ -83,7 +83,7 @@ void main() {
 							if (opcao2 == 1) {
 								printf("NIF:\n");
 								scanf("%d", &NIF);
-								if (verificar_registo(clientes, NIF)) {
+									if (verificar_registo(clientes, NIF)) {
 									scanf("%*c");
 									printf("Nome:\n");
 									gets(nome);
@@ -100,6 +100,8 @@ void main() {
 								else {
 									printf("Utilizador ja se encontra registado\n");
 								}
+								
+								
 								
 
 
@@ -180,7 +182,10 @@ void main() {
 								if (Reservar_Veiculo(veiculos,NIF)) {
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
-									//GuardarVeiculos(veiculos);
+									GuardarVeiculos(veiculos);
+									Historico(veiculos);
+
+									Historico_binario(veiculos);
 								}
 								else {
 									printf("Veiculo indisponivel\n");
@@ -191,7 +196,7 @@ void main() {
 							else if (opcao3 == 2) {
 								if (Cancelar_Reserva(veiculos, NIF)) {
 									GuardarVeiculos_Binario(veiculos);
-									//GuardarVeiculos(veiculos);
+									GuardarVeiculos(veiculos);
 								}
 								
 								
