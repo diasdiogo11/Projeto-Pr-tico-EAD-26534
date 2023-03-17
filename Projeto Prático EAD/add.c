@@ -162,10 +162,6 @@ Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {
 
 }
 
-
-
-
-
 Gestores* imprimir_gestores(Gestores* inicio) {
 
 	while (inicio != NULL) {
@@ -196,6 +192,7 @@ Clientes* saldo(Clientes* inicio, int NIF_procurado){
 
 	
 }
+
 int login_gestores(Gestores* inicio, char* username, char* password) {
 	Gestores* current = inicio;
 	for (current; current != NULL; current = current->proximo_gestor) {
@@ -291,6 +288,28 @@ Veiculos* LerVeiculos() {
 	}
 	return(aux);
 }
+
+void GuardarReservas(Reservas* inicio) {
+
+	FILE* fp;
+	fp = fopen("Reservas.txt", "w");
+
+	if (fp == NULL)
+	{
+		printf("Ficheiro indisponivel.");
+	}
+	else
+	{
+		while (inicio != NULL)
+		{
+			fprintf(fp, "%d;%d;%d;%s;%d;%s;%d;%d", inicio->NIF, inicio->meio->codigo, inicio->meio->bateria, inicio->meio->localizacao, inicio->meio->custo, inicio->meio->tipo, inicio->meio->reserva, inicio->meio->NIF_reserva);
+			inicio = inicio->seguinte;
+		}
+		fclose(fp);
+
+	}
+}
+
 
 
 void GuardarVeiculos_Binario(Veiculos* inicio)
@@ -400,43 +419,6 @@ Clientes* LerClientes_Binario()
 
 }
 
-void Historico_binario(Veiculos* inicio)
-{
-	FILE* fp;
-	fp = fopen("Reservas.bin", "ab");
-	if (fp != NULL)
-	{
-		Veiculos* aux = inicio;
-		while (aux != NULL)
-		{
-			fwrite(aux, sizeof(Veiculos), 1, fp);
-			aux = aux->proximo_veiculo;
-		}
-		fclose(fp);
-	}
-}
-
-void Historico(Veiculos* inicio)
-{
-	FILE* fp;
-	fp = fopen("Reservas.txt", "a");
-	if (fp != NULL)
-	{
-		Veiculos* aux = inicio;
-		for (aux; aux != NULL; aux = aux->proximo_veiculo) {
-			fprintf(fp, "%d;%d;%s;%d;%s;%d;%d\n", aux->codigo, aux->bateria,
-				aux->localizacao, aux->custo, aux->tipo, aux->reserva, aux->NIF_reserva);
-		}
-		fclose(fp);
-
-
-	}
-
-}
-
-
-
-
 
 void menu_principal() {
 	int opcao;
@@ -492,7 +474,7 @@ void menu_clientes() {
 	printf("| 4.DEFINICOES                                  |\n");
 	printf("| 5.MINHAS RESERVAS                             |\n");
 	printf("| 6.HISTORICO RESERVAS                          |\n");
-	printf("| 7.EXIT                                        |\n");
+	printf("| 0.EXIT                                        |\n");
 	printf("*-----------------------------------------------*\n");
 	
 	
@@ -504,7 +486,7 @@ void menu_definicoes() {
 	printf("*---------------- DEFINICOES ----------------*\n");
 	printf("| 1.ALTERAR NOME DE USUARIO                  |\n");
 	printf("| 2.ALTERAR MORADA                           |\n");
-	printf("| 3.VOLTAR MENU CLIENTES                     |\n");
+	printf("| 0.VOLTAR MENU CLIENTES                     |\n");
 	printf("*--------------------------------------------*\n");
 
 }
@@ -524,58 +506,44 @@ int verificar_registo(Clientes* inicio, int NIF) {
 	return 1;
 }
 
-void AlterarNome(Clientes* inicio, int NIF_procurado) {
+void AlterarDados(Clientes* inicio, int NIF_procurado) {
 
-	char novo_nome[50];
-	scanf("%*c");
-	printf("Digite o novo nome de usuario\n");
-	gets(novo_nome);
-	
+	int opcao;
+	char novo_nome[50], nova_morada[50];
 	Clientes* current = inicio;
 
-	for (current; current != NULL; current = current->proximo_cliente) {
-		if (NIF_procurado == current->NIF) {
-			strcpy(current->nome, novo_nome);
-		}
+	menu_definicoes();
+
+	printf("Que parametro deseja alterar?\n");
+	scanf("%d", &opcao);
+
+	if (opcao == 1) {
+		scanf("%*c");
+		printf("Digite o novo nome de usuario\n");
+		gets(novo_nome);
+		for (current; current != NULL; current = current->proximo_cliente) {
+			if (NIF_procurado == current->NIF) {
+				strcpy(current->nome, novo_nome);
+			}
 		
-	}
-
-}
-
-void AlterarMorada(Clientes* inicio, int NIF_procurado) {
-
-	char nova_morada[50];
-
-	scanf("%*c");
-	printf("Digite a sua nova morada\n");
-	gets(nova_morada);
-
-	Clientes* current = inicio;
-
-	for (current; current != NULL; current = current->proximo_cliente) {
-		if (NIF_procurado == current->NIF) {
-			strcpy(current->morada, nova_morada);
 		}
 	}
-
-}
-
-
-void Historico_Reservas(Veiculos* inicio, int NIF_reserva) {
-
-	Veiculos* current = inicio;
-
-	for (current; current != NULL; current = current->proximo_veiculo) {
-		if (current->reserva == 1 && current->NIF_reserva == NIF_reserva) {
-			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+	else if (opcao == 2) {
+		scanf("%*c");
+		printf("Digite a sua nova morada\n");
+		gets(nova_morada);
+		for (current; current != NULL; current = current->proximo_cliente) {
+			if (NIF_procurado == current->NIF) {
+				strcpy(current->morada, nova_morada);
+			}
 			
-
-		}
-		else if (current->reserva == 0 && current->NIF_reserva == 0) {
-			printf("Ainda nao reservou qualquer veiculo\n");
 		}
 	}
+	
+
 }
+
+
 int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva) {
 	int code;
 
@@ -616,9 +584,10 @@ int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 			return 1;
 		}
 		else if (current->reserva == 0 && current->NIF_reserva == 0) {
-			printf("Veiculo disponivel\n");
 			return 0;
 		}
+	
+		
 	}
 }
 

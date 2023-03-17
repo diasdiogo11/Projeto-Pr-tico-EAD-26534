@@ -40,6 +40,14 @@ typedef struct registo_veiculos {
 
 }Veiculos;
 
+typedef struct registo_reservas {
+	int NIF;
+	Veiculos* meio;
+	struct registo_reservas* seguinte;
+
+}Reservas;
+
+
 
 
 Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_, char morada_[], int saldo); //Inserção de novos clientes

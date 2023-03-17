@@ -12,23 +12,18 @@
 
 void main() {
 
-	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50];
+	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50];
 	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0;
 
 	Clientes* clientes = NULL;
 	Veiculos* veiculos = NULL;
 	Gestores* gestores = NULL;
-
-
-
+	Reservas* reservas = NULL;
 
 	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos_Binario();
-	imprimir_clientes(clientes);
 	gestores = inserir_gestores(gestores, "diogo", "lesi");
 	gestores = inserir_gestores(gestores, "diogo", "lesi");
-
-	
 
 
 	do {
@@ -183,24 +178,35 @@ void main() {
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
-									Historico(veiculos);
-
-									Historico_binario(veiculos);
+									GuardarReservas(reservas);
+									printf("*--------------------------------------------*\n");
+									printf("|              DADOS ATUALIZADOS             |\n");
+									printf("|                 FACA LOGIN                 |\n");
+									printf("*--------------------------------------------*\n");
+									break;
 								}
 								else {
 									printf("Veiculo indisponivel\n");
 
 								}
+								
+								
 
 							}
 							else if (opcao3 == 2) {
 								if (Cancelar_Reserva(veiculos, NIF)) {
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
+									break;
+								}
+								else {
+									printf("*---------------------------------------------*\n");
+									printf("|   ESTE VEICULO JA SE ENCONTRA DISPONIVEL    |\n");
+									printf("*---------------------------------------------*\n");
 								}
 								
 								
-
+								
 							}
 							else if (opcao3 == 3) {
 
@@ -208,6 +214,7 @@ void main() {
 								GuardarClientes_Binario(clientes);
 								GuardarClientes(clientes);
 								imprimir_clientes(clientes);
+								break;
 
 							}
 							else if (opcao3 == 4) {
@@ -215,13 +222,14 @@ void main() {
 								menu_definicoes();
 								scanf("%d", &opcao1);
 								if (opcao1 == 1) {
-									AlterarNome(clientes, NIF);
+								
+									
+									AlterarDados(clientes, NIF, novo_nome, nova_morada);
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
 									imprimir_clientes(clientes);
 								}
 								else if (opcao1 == 2) {
-									AlterarMorada(clientes, NIF);
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
 									clientes = imprimir_clientes(clientes);
@@ -233,6 +241,8 @@ void main() {
 
 							}
 							else if (opcao3 == 6) {
+
+								
 
 							
 
