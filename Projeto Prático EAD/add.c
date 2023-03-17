@@ -6,7 +6,7 @@
 #include <conio.h>
 
 
-Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo) {
+Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo) { // Função que cria uma lista ligada para os clientes
 	
 	
 		Clientes* Novo = malloc(sizeof(struct registo_clientes));
@@ -22,9 +22,9 @@ Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,c
 		else {
 			return inicio;
 		}
-}
+} 
 
-Clientes* imprimir_clientes(Clientes* inicio) {
+Clientes* imprimir_clientes(Clientes* inicio) { //Função que imprime os dados inseridos na lista ligada nteriormente criada
 
 	while (inicio != NULL) {
 		printf("%d %s %d %s %d\n",inicio->NIF, inicio->nome, inicio->idade, inicio->morada, inicio->saldo);
@@ -539,6 +539,7 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 			
 		}
 	}
+	
 	
 
 }

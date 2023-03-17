@@ -219,21 +219,11 @@ void main() {
 							}
 							else if (opcao3 == 4) {
 								clear();
-								menu_definicoes();
-								scanf("%d", &opcao1);
-								if (opcao1 == 1) {
+								AlterarDados(clientes, NIF, novo_nome, nova_morada);
+								GuardarClientes_Binario(clientes);
+								GuardarClientes(clientes);
 								
-									
-									AlterarDados(clientes, NIF, novo_nome, nova_morada);
-									GuardarClientes_Binario(clientes);
-									GuardarClientes(clientes);
-									imprimir_clientes(clientes);
-								}
-								else if (opcao1 == 2) {
-									GuardarClientes_Binario(clientes);
-									GuardarClientes(clientes);
-									clientes = imprimir_clientes(clientes);
-								}
+								
 							}
 							else if (opcao3 == 5) {
 								veiculos = imprimir_reservas(veiculos, NIF);
