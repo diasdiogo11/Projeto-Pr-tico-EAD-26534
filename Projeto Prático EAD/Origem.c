@@ -30,15 +30,15 @@ void main() {
 
 	do {
 		menu_principal();
+		printf("OPCAO:\n");
 		scanf("%d", &opcao);
 		
-
 		if (opcao == 1) {
 			clear();
 			cabeçalho_registar();
 			printf("NIF:\n");
 			scanf("%d", &NIF);
-			if (verificar_registo(clientes, NIF)) {
+			if (verificar_registo_clientes(clientes, NIF)) {
 				scanf("%*c");
 				printf("Nome:\n");
 				gets(nome);
@@ -50,9 +50,14 @@ void main() {
 				clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
 				GuardarClientes_Binario(clientes);
 				GuardarClientes(clientes);
+				clear();
+				printf("Registo efetuado com sucesso!\n");
+				
 			}
 			else {
+				clear();
 				printf("Utilizador ja se encontra registado\n");
+				
 			}
 				
 				
@@ -64,23 +69,29 @@ void main() {
 			
 			clear();
 			menu_login();
+			printf("OPCAO:\n");
 			scanf("%d", &opcao1);
+			clear();
 			if (opcao1 == 1) {
+				cabeçalho_admin();
 				printf("Email:\n");
 				scanf("%s", usuario);
 				printf("Password:\n");
 				scanf("%s", password);
-
+				
 					if (login_gestores(gestores, usuario, password)) {
 						printf("Bem-vindo, %s!\n", usuario);
+						clear();
 						do {
 							menu_gestores();
 							scanf("%d", &opcao2);
 
+
 							if (opcao2 == 1) {
+								clear();
 								printf("NIF:\n");
 								scanf("%d", &NIF);
-								if (verificar_registo(clientes, NIF)) {
+								if (verificar_registo_clientes(clientes, NIF)) {
 									scanf("%*c");
 									printf("Nome:\n");
 									gets(nome);
@@ -92,62 +103,94 @@ void main() {
 									clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
-
+									clear();
+									printf("Registo efetuado com sucesso!\n");
 								}
 								else {
+									clear();
 									printf("Utilizador ja se encontra registado\n");
 								}
 
 							}
 
 							else if (opcao2 == 2) {
+								clear();
 								printf("NIF do utilizador a remover do sistema\n");
 								scanf("%d", &NIF_);
-								clientes = remover_clientes(clientes, NIF_);
-								GuardarClientes_Binario(clientes);
-								GuardarClientes(clientes);
+								if (!verificar_registo_clientes(clientes, NIF_)){
+									clientes = remover_clientes(clientes, NIF_);
+									GuardarClientes_Binario(clientes);
+									GuardarClientes(clientes);
+									clear();
+									printf("Utilizador removido com sucesso\n");
+								}
+								else {
+									clear();
+									printf("Utilizador nao registado no nosso sistema\n");
+								}
+								
 							}
 							else if (opcao2 == 3) {
-
+								clear();
 								ordenação_clientes(clientes);
 								imprimir_clientes(clientes);
 
+
 							}
 							else if (opcao2 == 4) {
+								clear();
 								printf("Codigo:\n");
 								scanf("%d", &codigo);
-								printf("Bateria:\n");
-								scanf("%d", &bateria);
-								scanf("%*c");
-								printf("Localizacao:\n");
-								gets(localizacao);
-								printf("Custo:\n");
-								scanf("%d", &custo);
-								scanf("%*c");
-								printf("Tipo:\n");
-								gets(tipo);
-								veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva);
-								GuardarVeiculos_Binario(veiculos);
-								GuardarVeiculos(veiculos);
-
+								if (verificar_registo_veiculos(veiculos, codigo)) {
+									printf("Bateria:\n");
+									scanf("%d", &bateria);
+									scanf("%*c");
+									printf("Localizacao:\n");
+									gets(localizacao);
+									printf("Custo:\n");
+									scanf("%d", &custo);
+									scanf("%*c");
+									printf("Tipo:\n");
+									gets(tipo);
+									veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva);
+									GuardarVeiculos_Binario(veiculos);
+									GuardarVeiculos(veiculos);
+									clear();
+									printf("Registo efetuado com sucesso!\n");
+								}
+								else {
+									clear();
+									printf("Este veiculo ja se encontra registado\n");
+								}
 							}
 							else if (opcao2 == 5) {
-								printf("Codigo do meio a remover do sistema\n");
-								scanf("%d", &NIF_);
-								veiculos = remover_veiculos(veiculos, NIF_);
-								GuardarVeiculos_Binario(veiculos);
-								GuardarVeiculos(veiculos);
-
+								clear();
+								printf("Codigo do veiculo a remover do sistema\n");
+								scanf("%d", &codigo);
+								if (!verificar_registo_veiculos(veiculos, codigo)) {
+									veiculos = remover_veiculos(veiculos, codigo);
+									GuardarVeiculos_Binario(veiculos);
+									GuardarVeiculos(veiculos);
+									clear();
+									printf("Veiculo removido com sucesso\n");
+								
+								}
+								else {
+									clear();
+									printf("Veiculo nao registado no nosso sistema\n");
+								}
 							}
 							else if (opcao2 == 6) {
+								clear();
 								ordenação_veiculos(veiculos);
 								imprimir_veiculos(veiculos);
 							}
 							else if (opcao2 == 7) {
-
+								clear();
 								if (strcmp(usuario, "diogo1234") == 0 && strcmp(password, "lesi") == 0) {
 									menu_mastergestor();
 									scanf("%d", &opcao6);
+									clear();
 									if (opcao6 == 1) {
 										printf("Digite o email do novo gestor\n");
 										scanf("%s", email);
@@ -161,6 +204,12 @@ void main() {
 										printf("Digite o email do gestor a remover do sistema\n");
 										scanf("%s", email);
 										gestores = remover_gestores(gestores, email);
+										GuardarGestores_Binario(gestores);
+									}
+									else if (opcao6 == 3) {
+										printf("Qual o gestor a alterar dados\n");
+										scanf("%s", usuario);
+										AlterarDadosGestores(gestores, usuario);
 										GuardarGestores_Binario(gestores);
 									}
 									
@@ -179,6 +228,7 @@ void main() {
 					
 					
 					else {
+						clear();
 						printf("Nome de usuario ou senha incorretos.\n");
 					}
 					
@@ -190,7 +240,7 @@ void main() {
 				
 			}
 			else {
-				
+				cabeçalho_cliente();
 				printf("NIF:\n");
 				scanf("%d", &NIF);
 				scanf("%*c");
@@ -203,11 +253,11 @@ void main() {
 							menu_clientes();
 							scanf("%d", &opcao3);
 							if (opcao3 == 1) {
-								LocalizarVeiculos(veiculos);
+
+
 								ordenação_veiculos(veiculos);
-								//imprimir_veiculos(veiculos);
-
-
+								LocalizarVeiculos(veiculos);
+								
 								if (Reservar_Veiculo(veiculos,NIF)) {
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
@@ -253,7 +303,7 @@ void main() {
 							}
 							else if (opcao3 == 4) {
 								clear();
-								AlterarDados(clientes, NIF, novo_nome, nova_morada);
+								AlterarDados(clientes, NIF);
 								GuardarClientes_Binario(clientes);
 								GuardarClientes(clientes);
 								

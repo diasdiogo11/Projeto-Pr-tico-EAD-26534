@@ -118,7 +118,6 @@ Veiculos* remover_veiculos(Veiculos* inicio, int code) { //Dado uma lista ligada
 		for (atual; atual != NULL && atual->codigo != code; atual = atual->proximo_veiculo) {
 
 			anterior = atual;
-
 		}
 		if (atual == NULL) {
 			return(inicio);
@@ -262,7 +261,7 @@ void ordenação_veiculos(Veiculos* inicio) {
 
 	for (pi; pi != NULL; pi = pi->proximo_veiculo) {
 		for (pj = pi->proximo_veiculo; pj != NULL; pj = pj->proximo_veiculo) {
-			if (pi->bateria > pj->bateria ) {
+			if (pi->bateria < pj->bateria ) {
 				aux = pi->bateria;
 				pi->bateria = pj->bateria;
 				pj->bateria = aux;
@@ -576,7 +575,19 @@ void menu_definicoes() {
 
 }
 
-int verificar_registo(Clientes* inicio, int NIF) {
+void cabeçalho_admin() {
+	printf("*------------------------------------*\n");
+	printf("|            ADMINISTRADOR           |\n");
+	printf("*------------------------------------*\n");
+}
+
+void cabeçalho_cliente() {
+	printf("*------------------------------------*\n");
+	printf("|               CLIENTE              |\n");
+	printf("*------------------------------------*\n");
+}
+
+int verificar_registo_clientes(Clientes* inicio, int NIF) {
 
 
 
@@ -587,6 +598,36 @@ int verificar_registo(Clientes* inicio, int NIF) {
 		
 			
 		
+	}
+	return 1;
+}
+
+int verificar_registo_veiculos(Veiculos* inicio, int codigo){
+
+
+
+	for (inicio; inicio != NULL; inicio = inicio->proximo_veiculo) {
+		if (inicio->codigo == codigo){
+			return 0;
+		}
+
+
+
+	}
+	return 1;
+}
+
+int verificar_registo_gestores(Gestores* inicio, char email[]) {
+
+
+
+	for (inicio; inicio != NULL; inicio = inicio->proximo_gestor) {
+		if (strcmp(inicio->email, email) == 0) {
+			return 0;
+		}
+
+
+
 	}
 	return 1;
 }
@@ -701,4 +742,38 @@ Veiculos* LocalizarVeiculos(Veiculos* inicio) {
 		}
 
 	}
+}
+
+void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
+	int opcao;
+	char novo_email[50], nova_password[50];
+	Gestores* current = inicio;
+
+
+	printf("Que parametro deseja alterar?\n");
+	scanf("%d", &opcao);
+
+	if (opcao == 1) {
+		scanf("%*c");
+		printf("Digite o novo email\n");
+		gets(novo_email);
+		for (current; current != NULL; current = current->proximo_gestor) {
+			if (strcmp(current->email, email_procurado) == 0) {
+				strcpy(current->email, novo_email);
+			}
+
+		}
+	}
+	else if (opcao == 2) {
+		scanf("%*c");
+		printf("Digite a sua nova password\n");
+		gets(nova_password);
+		for (current; current != NULL; current = current->proximo_gestor) {
+			if (strcmp(current->email, email_procurado) == 0) {
+				strcpy(current->password, nova_password);
+			}
+
+		}
+	}
+
 }
