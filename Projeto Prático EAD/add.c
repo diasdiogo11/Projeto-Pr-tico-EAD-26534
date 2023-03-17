@@ -180,7 +180,7 @@ Gestores* remover_gestores(Gestores* inicio, char email[]) { //Dado uma lista li
 	if (atual == NULL) {
 		return(NULL);
 	}
-	else if (atual->email == email)
+	else if (strcmp(atual->email, email) == 0)
 	{
 		aux = atual->proximo_gestor;
 		free(atual);
@@ -188,7 +188,7 @@ Gestores* remover_gestores(Gestores* inicio, char email[]) { //Dado uma lista li
 	}
 	else
 	{
-		for (atual; atual != NULL && atual->email != email; atual = atual->proximo_gestor) {
+		for (atual; atual != NULL && strcmp(atual->email, email) == 0; atual = atual->proximo_gestor) {
 
 			anterior = atual;
 
@@ -540,7 +540,7 @@ void menu_gestores() {
 
 void menu_mastergestor() {
 	printf("*---------------- MENU GESTORES ----------------*\n");
-	printf("| 1.ADICIONAR GESTOR                             |\n");
+	printf("| 1.ADICIONAR GESTOR                            |\n");
 	printf("| 2.REMOVER GESTOR                              |\n");
 	printf("| 3.ALTERAR DADOS GESTOR                        |\n");
 	printf("| 0.VOLTAR                                      |\n");
@@ -757,12 +757,17 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 		scanf("%*c");
 		printf("Digite o novo email\n");
 		gets(novo_email);
-		for (current; current != NULL; current = current->proximo_gestor) {
-			if (strcmp(current->email, email_procurado) == 0) {
-				strcpy(current->email, novo_email);
+		
+			for (current; current != NULL; current = current->proximo_gestor) {
+				if (strcmp(current->email, email_procurado) == 0) {
+					if (verificar_registo_gestores(current, novo_email)) {
+						strcpy(current->email, novo_email);
+					}
+					
+				}
 			}
-
-		}
+		
+		
 	}
 	else if (opcao == 2) {
 		scanf("%*c");

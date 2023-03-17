@@ -28,6 +28,7 @@ void main() {
 
 
 
+
 	do {
 		menu_principal();
 		printf("OPCAO:\n");
@@ -187,24 +188,51 @@ void main() {
 							}
 							else if (opcao2 == 7) {
 								clear();
-								if (strcmp(usuario, "diogo1234") == 0 && strcmp(password, "lesi") == 0) {
+								if (strcmp(usuario, "diogo1234") == 0) {
 									menu_mastergestor();
 									scanf("%d", &opcao6);
 									clear();
 									if (opcao6 == 1) {
+										clear();
 										printf("Digite o email do novo gestor\n");
 										scanf("%s", email);
-										printf("Digite a password do novo gestor\n");
-										scanf("%s", password);
-										gestores = inserir_gestores(gestores, email, password);
-										GuardarGestores_Binario(gestores);
+										if (verificar_registo_gestores(gestores, email)) {
+											printf("Digite a password do novo gestor\n");
+											scanf("%s", password);
+											gestores = inserir_gestores(gestores, email, password);
+											GuardarGestores_Binario(gestores);
+											clear();
+											printf("Registo efetuado com sucesso!\n");
+										}
+										else {
+											clear();
+											printf("Este gestor ja se encontra registado\n");
+										}
+										
 										
 									}
 									else if (opcao6 == 2) {
+										clear();
 										printf("Digite o email do gestor a remover do sistema\n");
 										scanf("%s", email);
-										gestores = remover_gestores(gestores, email);
-										GuardarGestores_Binario(gestores);
+										if (!verificar_registo_gestores(gestores, email)) {
+											if (strcmp(gestores->email, usuario) == 1) {
+												gestores = remover_gestores(gestores, email);
+												GuardarGestores_Binario(gestores);
+												clear();
+												printf("Gestor removido com sucesso\n");
+											}
+											else {
+												clear();
+												printf("Gestor impossivel de remover\n");
+											}
+											
+										}
+										else {
+											clear();
+											printf("Gestor nao registado no nosso sistema\n");
+										}
+										
 									}
 									else if (opcao6 == 3) {
 										printf("Qual o gestor a alterar dados\n");
@@ -214,9 +242,6 @@ void main() {
 									}
 									
 								}
-
-
-								
 								else {
 									printf("ACESSO NAO AUTORIZADO\n");
 								}
