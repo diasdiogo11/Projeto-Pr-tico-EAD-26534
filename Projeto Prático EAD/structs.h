@@ -40,7 +40,7 @@ typedef struct registo_veiculos {
 
 }Veiculos;
 
-typedef struct registo_reservas {
+typedef struct registo_chefe {
 	int NIF;
 	Veiculos* meio;
 	struct registo_reservas* seguinte;

@@ -24,7 +24,7 @@ Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,c
 		}
 } 
 
-Clientes* imprimir_clientes(Clientes* inicio) { //Função que imprime os dados inseridos na lista ligada nteriormente criada
+Clientes* imprimir_clientes(Clientes* inicio) { //Função que imprime os dados inseridos na lista ligada para os clientes anteriormente criada
 
 	while (inicio != NULL) {
 		printf("%d %s %d %s %d\n",inicio->NIF, inicio->nome, inicio->idade, inicio->morada, inicio->saldo);
@@ -32,7 +32,7 @@ Clientes* imprimir_clientes(Clientes* inicio) { //Função que imprime os dados in
 	}
 }
 
-Clientes* remover_clientes(Clientes* inicio, int code) {
+Clientes* remover_clientes(Clientes* inicio, int code) { //Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu NIF
 	
 	
 		Clientes* anterior = inicio, *atual = inicio, *aux;
@@ -67,7 +67,7 @@ Clientes* remover_clientes(Clientes* inicio, int code) {
 }
 
 
-Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_) {
+Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_) { // Função que cria uma lista ligada para os veiculos
 	Veiculos* Novo = malloc(sizeof(struct registo_veiculos));
 
 	if (Novo != NULL) {
@@ -90,7 +90,7 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 }
 
 
-Veiculos* imprimir_veiculos(Veiculos* inicio) {
+Veiculos* imprimir_veiculos(Veiculos* inicio) { //Função que imprime os dados inseridos na lista ligada para os veiculos anteriormente criada
 
 	while (inicio != NULL) {
 		
@@ -99,20 +99,7 @@ Veiculos* imprimir_veiculos(Veiculos* inicio) {
 	}
 }
 
-Veiculos* imprimir_reservas(Veiculos* inicio, int NIF) {
-
-	Veiculos* current = inicio;
-
-	for(current; current != NULL; current= current->proximo_veiculo) {
-		if (current->NIF_reserva == NIF) {
-			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
-		}
-
-		
-	}
-}
-
-Veiculos* remover_veiculos(Veiculos* inicio, int code) {
+Veiculos* remover_veiculos(Veiculos* inicio, int code) { //Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
 
 
 	Veiculos* anterior = inicio, * atual = inicio, * aux;
@@ -145,7 +132,23 @@ Veiculos* remover_veiculos(Veiculos* inicio, int code) {
 	}
 
 }
-Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {
+
+
+Veiculos* imprimir_reservas(Veiculos* inicio, int NIF) { //Função que dado um NIF, imprime as reservas atuais de um utilizador
+
+	Veiculos* current = inicio;
+
+	for(current; current != NULL; current= current->proximo_veiculo) {
+		if (current->NIF_reserva == NIF) {
+			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+		}
+
+		
+	}
+}
+
+
+Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {  // Função que cria uma lista ligada para os gestores
 	Gestores* Novo = malloc(sizeof(struct registo_gestores));
 
 	if (Novo != NULL) {
@@ -162,7 +165,7 @@ Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {
 
 }
 
-Gestores* imprimir_gestores(Gestores* inicio) {
+Gestores* imprimir_gestores(Gestores* inicio) { //Função que imprime os dados inseridos na lista ligada para os gestores anteriormente criada
 
 	while (inicio != NULL) {
 		printf("%s %s\n", inicio->email, inicio->password);
@@ -170,7 +173,41 @@ Gestores* imprimir_gestores(Gestores* inicio) {
 	}
 }
 
-Clientes* saldo(Clientes* inicio, int NIF_procurado){
+Gestores* remover_gestores(Gestores* inicio, char email[]) { //Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
+
+
+	Gestores* anterior = inicio, * atual = inicio, * aux;
+	
+	if (atual == NULL) {
+		return(NULL);
+	}
+	else if (atual->email == email)
+	{
+		aux = atual->proximo_gestor;
+		free(atual);
+		return(aux);
+	}
+	else
+	{
+		for (atual; atual != NULL && atual->email != email; atual = atual->proximo_gestor) {
+
+			anterior = atual;
+
+		}
+		if (atual == NULL) {
+			return(inicio);
+		}
+		else
+		{
+			anterior->proximo_gestor = atual->proximo_gestor;
+			free(atual);
+			return(inicio);
+		}
+	}
+
+}
+
+Clientes* saldo(Clientes* inicio, int NIF_procurado){ //Função que dado o NIF de um utilizador, carrega o saldo no parametro saldo
 
 	int valor;
 
@@ -193,7 +230,7 @@ Clientes* saldo(Clientes* inicio, int NIF_procurado){
 	
 }
 
-int login_gestores(Gestores* inicio, char* username, char* password) {
+int login_gestores(Gestores* inicio, char* username, char* password) { //Esta função percorre a lista ligada de gestores, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
 	Gestores* current = inicio;
 	for (current; current != NULL; current = current->proximo_gestor) {
 		if (strcmp(current->email, username) == 0 && strcmp(current->password, password) == 0) {
@@ -205,7 +242,7 @@ int login_gestores(Gestores* inicio, char* username, char* password) {
 	return 0;
 }
 
-int login_clientes(Clientes* inicio, char* username, int* code[]) {
+int login_clientes(Clientes* inicio, char* username, int* code[]) { //Esta função percorre a lista ligada de clientes, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
 	Clientes* current = inicio;
 	for (current; current != NULL; current = current->proximo_cliente) {
 		if (strcmp(current->nome, username) == 0 && code == current->NIF) {
@@ -348,6 +385,41 @@ Veiculos* LerVeiculos_Binario()
 
 }
 
+void GuardarGestores_Binario(Gestores* inicio)
+{
+	FILE* fp;
+	fp = fopen("Gestores.bin", "wb");
+	if (fp != NULL)
+	{
+		Gestores* aux = inicio;
+		while (aux != NULL)
+		{
+			fwrite(aux, sizeof(Gestores), 1, fp);
+			aux = aux->proximo_gestor;
+		}
+		fclose(fp);
+	}
+}
+
+Gestores* LerGestores_Binario()
+{
+	FILE* fp;
+	Gestores* aux = NULL;
+	fp = fopen("Gestores.bin", "rb");
+
+	if (fp != NULL)
+	{
+		Gestores current;
+		while (fread(&current, sizeof(Gestores), 1, fp) == 1)
+		{
+			aux = inserir_gestores(aux, current.email, current.password);
+		fclose(fp);
+	}
+	return aux;
+
+}
+}
+
 void GuardarClientes(Clientes* inicio)
 {
 	FILE* fp;
@@ -461,9 +533,22 @@ void menu_gestores() {
 	printf("| 4.INSERIR VEICULO                             |\n");
 	printf("| 5.REMOVER VEICULO                             |\n");
 	printf("| 6.LISTAR VEICULOS                             |\n");
+	printf("| 7.GESTOR MASTER (ACESSO RESTRITO)             |\n");
 	printf("| 0.EXIT                                        |\n");
 	printf("*-----------------------------------------------*\n");
 	
+}
+
+void menu_mastergestor() {
+	printf("*---------------- MENU GESTORES ----------------*\n");
+	printf("| 1.ADICIONAR GESTOR                             |\n");
+	printf("| 2.REMOVER GESTOR                              |\n");
+	printf("| 3.ALTERAR DADOS GESTOR                        |\n");
+	printf("| 0.VOLTAR                                      |\n");
+	printf("*-----------------------------------------------*\n");
+
+
+
 }
 void menu_clientes() {
 	
@@ -472,7 +557,7 @@ void menu_clientes() {
 	printf("| 2.CANCELAR RESERVA                            |\n");
 	printf("| 3.CARREGAR SALDO                              |\n");
 	printf("| 4.DEFINICOES                                  |\n");
-	printf("| 5.MINHAS RESERVAS                             |\n");
+	printf("| 5.RESERVAS ATIVAS                             |\n");
 	printf("| 6.HISTORICO RESERVAS                          |\n");
 	printf("| 0.EXIT                                        |\n");
 	printf("*-----------------------------------------------*\n");
@@ -566,8 +651,6 @@ int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva) {
 	}
 
 
-
-
 int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 
 	int code;
@@ -597,4 +680,25 @@ int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 void clear() {
 
 	system("@cls || clear");
+}
+
+
+Veiculos* LocalizarVeiculos(Veiculos* inicio) {
+
+	char localizacao_pretendida[TAM];
+
+	Veiculos* current = inicio;
+	
+	scanf("%*c");
+	printf("Onde deseja encontrar veiculos?\n");
+	gets(localizacao_pretendida);
+
+	for (current; current != NULL; current = current->proximo_veiculo) {
+
+		if ((strcmp(current->localizacao, localizacao_pretendida) == 0)) {
+			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+			 
+		}
+
+	}
 }

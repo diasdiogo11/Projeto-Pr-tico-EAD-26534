@@ -12,8 +12,8 @@
 
 void main() {
 
-	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50];
-	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0;
+	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50];
+	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0;
 
 	Clientes* clientes = NULL;
 	Veiculos* veiculos = NULL;
@@ -22,8 +22,10 @@ void main() {
 
 	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos_Binario();
-	gestores = inserir_gestores(gestores, "diogo", "lesi");
-	gestores = inserir_gestores(gestores, "diogo", "lesi");
+	gestores = LerGestores_Binario();
+	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
+
+
 
 
 	do {
@@ -68,7 +70,7 @@ void main() {
 				scanf("%s", usuario);
 				printf("Password:\n");
 				scanf("%s", password);
-				
+
 					if (login_gestores(gestores, usuario, password)) {
 						printf("Bem-vindo, %s!\n", usuario);
 						do {
@@ -78,7 +80,7 @@ void main() {
 							if (opcao2 == 1) {
 								printf("NIF:\n");
 								scanf("%d", &NIF);
-									if (verificar_registo(clientes, NIF)) {
+								if (verificar_registo(clientes, NIF)) {
 									scanf("%*c");
 									printf("Nome:\n");
 									gets(nome);
@@ -90,15 +92,11 @@ void main() {
 									clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
-									
+
 								}
 								else {
 									printf("Utilizador ja se encontra registado\n");
 								}
-								
-								
-								
-
 
 							}
 
@@ -145,13 +143,49 @@ void main() {
 								ordenação_veiculos(veiculos);
 								imprimir_veiculos(veiculos);
 							}
+							else if (opcao2 == 7) {
+
+								if (strcmp(usuario, "diogo1234") == 0 && strcmp(password, "lesi") == 0) {
+									menu_mastergestor();
+									scanf("%d", &opcao6);
+									if (opcao6 == 1) {
+										printf("Digite o email do novo gestor\n");
+										scanf("%s", email);
+										printf("Digite a password do novo gestor\n");
+										scanf("%s", password);
+										gestores = inserir_gestores(gestores, email, password);
+										GuardarGestores_Binario(gestores);
+										
+									}
+									else if (opcao6 == 2) {
+										printf("Digite o email do gestor a remover do sistema\n");
+										scanf("%s", email);
+										gestores = remover_gestores(gestores, email);
+										GuardarGestores_Binario(gestores);
+									}
+									
+								}
+
+
+								
+								else {
+									printf("ACESSO NAO AUTORIZADO\n");
+								}
+
+							}
 						} while (opcao2 != 0);
-						
-						
 					}
+					
+					
+					
 					else {
 						printf("Nome de usuario ou senha incorretos.\n");
 					}
+					
+				
+
+					
+					
 				
 				
 			}
@@ -169,9 +203,9 @@ void main() {
 							menu_clientes();
 							scanf("%d", &opcao3);
 							if (opcao3 == 1) {
-
+								LocalizarVeiculos(veiculos);
 								ordenação_veiculos(veiculos);
-								imprimir_veiculos(veiculos);
+								//imprimir_veiculos(veiculos);
 
 
 								if (Reservar_Veiculo(veiculos,NIF)) {
@@ -181,7 +215,7 @@ void main() {
 									GuardarReservas(reservas);
 									printf("*--------------------------------------------*\n");
 									printf("|              DADOS ATUALIZADOS             |\n");
-									printf("|                 FACA LOGIN                 |\n");
+									printf("|                 FACA LOGIN!!!              |\n");
 									printf("*--------------------------------------------*\n");
 									break;
 								}
