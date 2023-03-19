@@ -5,13 +5,17 @@
 #include <math.h>
 #include <conio.h>
 
-//Autor Diogo Filipe Ferreira Dias
-//NºAluno 26534
-//UC Estruturas De Dados Avançados
-// 1ºAno de LESI / 2ºSemestre
 
 
-Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo) { // Função que cria uma lista ligada para os clientes
+//! @brief Função que cria uma lista ligada para os clientes
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF_  NIF do Cliente a ser inserido
+//! @param nome_ Nome do Cliente a ser inserido
+//! @param idade_ Idade do Cliente a ser inserido
+//! @param morada_ Morada do Cliente a ser inserido
+//! @param saldo Saldo do Cliente a ser inserido
+//! @return 
+Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo) { 
 	
 	
 		Clientes* Novo = malloc(sizeof(struct registo_clientes));
@@ -28,8 +32,11 @@ Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,c
 			return inicio;
 		}
 } 
+//! @brief Função que imprime os dados inseridos na lista ligada para os clientes anteriormente criada
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @return 
 
-Clientes* imprimir_clientes(Clientes* inicio) { //Função que imprime os dados inseridos na lista ligada para os clientes anteriormente criada
+Clientes* imprimir_clientes(Clientes* inicio) { 
 
 	while (inicio != NULL) {
 		printf("%d %s %d %s %d\n",inicio->NIF, inicio->nome, inicio->idade, inicio->morada, inicio->saldo);
@@ -37,7 +44,11 @@ Clientes* imprimir_clientes(Clientes* inicio) { //Função que imprime os dados in
 	}
 }
 
-Clientes* remover_clientes(Clientes* inicio, int code) { //Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu NIF
+//! @brief Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu NIF
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param code NIF do cliente a ser removido 
+//! @return 
+Clientes* remover_clientes(Clientes* inicio, int code) {
 	
 	
 		Clientes* anterior = inicio, *atual = inicio, *aux;
@@ -72,7 +83,18 @@ Clientes* remover_clientes(Clientes* inicio, int code) { //Dado uma lista ligada
 }
 
 
-Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_) { // Função que cria uma lista ligada para os veiculos
+//! @brief Função que cria uma lista ligada para os veiculos
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param codigo_ Codigo do meio a ser inserido
+//! @param bateria_ Bateria do meio a ser inserido
+//! @param localizacao_ 
+//! @param custo_ Custo por Km do meio a ser inserido
+//! @param tipo_ Tipo do meio a ser inserido
+//! @param reserva_ 1 se tiver reservado ou 0 se nao tiver
+//! @param NIF_reserva_ 0 se nao tiver reservado ou NIF do cliente que a reservou
+//! @return 
+
+Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_) { 
 	Veiculos* Novo = malloc(sizeof(struct registo_veiculos));
 
 	if (Novo != NULL) {
@@ -94,18 +116,22 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 
 }
 
+//! @brief Função que imprime os dados inseridos na lista ligada para os veiculos anteriormente criada
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @return 
 
-Veiculos* imprimir_veiculos(Veiculos* inicio) { //Função que imprime os dados inseridos na lista ligada para os veiculos anteriormente criada
-
+Veiculos* imprimir_veiculos(Veiculos* inicio) { 
 	while (inicio != NULL) {
 		
 		printf("%d %d %s %d %s\n", inicio->codigo, inicio->bateria, inicio->localizacao, inicio->custo, inicio->tipo);
 		inicio = inicio->proximo_veiculo;
 	}
 }
-
-Veiculos* remover_veiculos(Veiculos* inicio, int code) { //Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
-
+//! @brief Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param code Codigo do veiculo a remover
+//! @return 
+Veiculos* remover_veiculos(Veiculos* inicio, int code) { 
 
 	Veiculos* anterior = inicio, * atual = inicio, * aux;
 
@@ -137,8 +163,11 @@ Veiculos* remover_veiculos(Veiculos* inicio, int code) { //Dado uma lista ligada
 
 }
 
-
-Veiculos* imprimir_reservas(Veiculos* inicio, int NIF) { //Função que dado um NIF, imprime as reservas atuais de um utilizador
+//! @brief Função que dado um NIF, imprime as reservas atuais de um utilizador
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF NIF do cliente que desejamos ver as reservas ativas
+//! @return 
+Veiculos* imprimir_reservas(Veiculos* inicio, int NIF) { 
 
 	Veiculos* current = inicio;
 
@@ -151,8 +180,12 @@ Veiculos* imprimir_reservas(Veiculos* inicio, int NIF) { //Função que dado um NI
 	}
 }
 
-
-Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {  // Função que cria uma lista ligada para os gestores
+//! @brief Função que cria uma lista ligada para os gestores
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param email_  Email do Gestor a ser inserido
+//! @param password_ Password do Gestor a ser inserido
+//! @return 
+Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {  
 	Gestores* Novo = malloc(sizeof(struct registo_gestores));
 
 	if (Novo != NULL) {
@@ -168,16 +201,21 @@ Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) { 
 	}
 
 }
-
-Gestores* imprimir_gestores(Gestores* inicio) { //Função que imprime os dados inseridos na lista ligada para os gestores anteriormente criada
+//! @brief Função que imprime os dados inseridos na lista ligada para os gestores anteriormente criada
+//! @param inicio  Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @return 
+Gestores* imprimir_gestores(Gestores* inicio) { 
 
 	while (inicio != NULL) {
 		printf("%s %s\n", inicio->email, inicio->password);
 		inicio = inicio->proximo_gestor;
 	}
 }
-
-Gestores* remover_gestores(Gestores* inicio, char email[]) { //Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
+//! @brief Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param email Email do gestor a remover
+//! @return 
+Gestores* remover_gestores(Gestores* inicio, char email[]) { 
 
 
 	Gestores* anterior = inicio, * atual = inicio, * aux;
@@ -211,7 +249,11 @@ Gestores* remover_gestores(Gestores* inicio, char email[]) { //Dado uma lista li
 
 }
 
-int saldo(Clientes* inicio, int NIF_procurado){ //Função que dado o NIF de um utilizador, carrega o saldo no parametro saldo
+//! @brief Função que dado o NIF de um utilizador, carrega o saldo no parametro saldo
+//! @param inicio  Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF_procurado NIF do utilizador a carregar o saldo
+//! @return 
+int saldo(Clientes* inicio, int NIF_procurado){ 
 
 	int valor;
 
@@ -230,8 +272,12 @@ int saldo(Clientes* inicio, int NIF_procurado){ //Função que dado o NIF de um ut
 	return 0;
 
 }
-
-int login_gestores(Gestores* inicio, char* username, char* password) { //Esta função percorre a lista ligada de gestores, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
+//! @brief Esta função percorre a lista ligada de gestores, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param username Username do gestor a verificar se existe no sistema
+//! @param password  Password do gestor a verificar se existe no sistema
+//! @return 
+int login_gestores(Gestores* inicio, char* username, char* password) {
 	Gestores* current = inicio;
 	for (current; current != NULL; current = current->proximo_gestor) {
 		if (strcmp(current->email, username) == 0 && strcmp(current->password, password) == 0) {
@@ -242,8 +288,12 @@ int login_gestores(Gestores* inicio, char* username, char* password) { //Esta fu
 	}
 	return 0;
 }
-
-int login_clientes(Clientes* inicio, char* username, int* code[]) { //Esta função percorre a lista ligada de clientes, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
+//! @brief Esta função percorre a lista ligada de clientes, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param username Username do cliente a verificar se existe no sistema
+//! @param code Codigo do cliente a verificar se existe no sistema
+//! @return 
+int login_clientes(Clientes* inicio, char* username, int* code[]) { 
 	Clientes* current = inicio;
 	for (current; current != NULL; current = current->proximo_cliente) {
 		if (strcmp(current->nome, username) == 0 && code == current->NIF) {
@@ -253,8 +303,9 @@ int login_clientes(Clientes* inicio, char* username, int* code[]) { //Esta funçã
 	} return 0;
 }
 
-
-void ordenação_veiculos(Veiculos* inicio) { //Função que ordena os veiculos inseridos na lista ligada veiculos por ordem decrescente da sua bateria
+//! @brief Função que ordena os veiculos inseridos na lista ligada veiculos por ordem decrescente da sua bateria
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+void ordenação_veiculos(Veiculos* inicio) { 
 
 	Veiculos* pi = inicio;
 	Veiculos* pj = NULL;
@@ -271,8 +322,9 @@ void ordenação_veiculos(Veiculos* inicio) { //Função que ordena os veiculos inse
 		}
 	}
 }
-
-void ordenação_clientes(Clientes* inicio) { //Função que ordena os clientes os na lista ligada clientes por ordem crescente do seu NIF
+//! @brief Função que ordena os clientes os na lista ligada clientes por ordem crescente do seu NIF
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+void ordenação_clientes(Clientes* inicio) { 
 
 	Clientes* pi = inicio;
 	Clientes* pj = NULL;
@@ -290,8 +342,9 @@ void ordenação_clientes(Clientes* inicio) { //Função que ordena os clientes os n
 	}
 }
 
-
-void GuardarVeiculos(Veiculos* inicio) //Esta função guarda os dados presentes na lista ligada num ficheiro de texto, com o nome "Veiculos"
+//! @brief sta função guarda os dados presentes na lista ligada num ficheiro de texto, com o nome "Veiculos"
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+void GuardarVeiculos(Veiculos* inicio) 
 {
 	FILE* fp;
 	fp = fopen("Veiculos.txt", "w");
@@ -308,8 +361,9 @@ void GuardarVeiculos(Veiculos* inicio) //Esta função guarda os dados presentes n
 	}
 
 }
-
-Veiculos* LerVeiculos() { //Posteriormente, esta função lê os dados inseridos no ficheiro de texto "Veiculos", inserindo-os na lista ligada novamente
+//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro de texto "Veiculos", inserindo-os na lista ligada novamente
+//! @return 
+Veiculos* LerVeiculos() { 
 	FILE* fp;
 	int code, bat, cust, reserva, NIF_reserva;
 	char tipo[50], loca[50];
@@ -327,8 +381,9 @@ Veiculos* LerVeiculos() { //Posteriormente, esta função lê os dados inseridos no
 	return(aux);
 }
 
-
-void GuardarVeiculos_Binario(Veiculos* inicio) //Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Veiculos"
+//! @brief Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Veiculos"
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+void GuardarVeiculos_Binario(Veiculos* inicio) 
 {
 	FILE* fp;
 	fp = fopen("Veiculos.bin", "wb");
@@ -344,8 +399,9 @@ void GuardarVeiculos_Binario(Veiculos* inicio) //Esta função guarda os dados pre
 	}
 }
 
-
-Veiculos* LerVeiculos_Binario() //Posteriormente, esta função lê os dados inseridos no ficheiro binário "Veiculos", inserindo-os na lista ligada novamente
+//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro binário "Veiculos", inserindo-os na lista ligada novamente
+//! @return 
+Veiculos* LerVeiculos_Binario() 
 {
 	FILE* fp;
 	Veiculos* aux = NULL;
@@ -363,8 +419,9 @@ Veiculos* LerVeiculos_Binario() //Posteriormente, esta função lê os dados inseri
 	return aux;
 
 }
-
-void GuardarGestores_Binario(Gestores* inicio) //Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Gestores"
+//! @brief Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Gestores"
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+void GuardarGestores_Binario(Gestores* inicio) 
 {
 	FILE* fp;
 	fp = fopen("Gestores.bin", "wb");
@@ -379,8 +436,9 @@ void GuardarGestores_Binario(Gestores* inicio) //Esta função guarda os dados pre
 		fclose(fp);
 	}
 }
-
-Gestores* LerGestores_Binario() //Posteriormente, esta função lê os dados inseridos no ficheiro binário "Gestores", inserindo-os na lista ligada novamente
+//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro binário "Gestores", inserindo-os na lista ligada novamente
+//! @return 
+Gestores* LerGestores_Binario() 
 {
 	FILE* fp;
 	Gestores* aux = NULL;
@@ -398,8 +456,9 @@ Gestores* LerGestores_Binario() //Posteriormente, esta função lê os dados inseri
 
 }
 }
-
-void GuardarClientes(Clientes* inicio) //Esta função guarda os dados presentes na lista ligada num ficheiro de texto, com o nome "Clientes"
+//! @brief Esta função guarda os dados presentes na lista ligada num ficheiro de texto, com o nome "Clientes"
+//! @param inicio 
+void GuardarClientes(Clientes* inicio) 
 {
 	FILE* fp;
 	fp = fopen("Clientes.txt", "w");
@@ -415,9 +474,9 @@ void GuardarClientes(Clientes* inicio) //Esta função guarda os dados presentes n
 	}
 	
 }
-
-Clientes* LerClientes()  //Posteriormente, esta função lê os dados inseridos no ficheiro de texto "Clientes", inserindo-os na lista ligada novamente
-{
+//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro de texto "Clientes", inserindo-os na lista ligada novamente
+//! @return 
+Clientes* LerClientes() {
 	FILE* fp;
 	int NIF, idade, saldo;
 	char nome[50], morada[50];
@@ -434,8 +493,9 @@ Clientes* LerClientes()  //Posteriormente, esta função lê os dados inseridos no 
 	}
 	return(aux);
 }
-
-void GuardarClientes_Binario(Clientes* inicio) //Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Clientes"
+//! @brief Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Clientes"
+//! @param inicio 
+void GuardarClientes_Binario(Clientes* inicio) 
 {
 	FILE* fp;
 	fp = fopen("Clientes.bin", "wb");
@@ -450,8 +510,9 @@ void GuardarClientes_Binario(Clientes* inicio) //Esta função guarda os dados pre
 		fclose(fp);
 	}
 }
-
-Clientes* LerClientes_Binario() //Posteriormente, esta função lê os dados inseridos no ficheiro binário "Clientes", inserindo-os na lista ligada novamente
+//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro binário "Clientes", inserindo-os na lista ligada novamente
+//! @return 
+Clientes* LerClientes_Binario()
 {
 	FILE* fp;
 	Clientes* aux = NULL;
@@ -470,8 +531,8 @@ Clientes* LerClientes_Binario() //Posteriormente, esta função lê os dados inseri
 
 }
 
-
-void menu_principal() { //cabeçalho do menu principal
+//! @brief cabeçalho do menu principal
+void menu_principal() { 
 	int opcao;
 	printf("*---------------- MENU PRINCIPAL ----------------*\n");
 	printf("| 1.REGISTAR                                     |\n");
@@ -481,16 +542,17 @@ void menu_principal() { //cabeçalho do menu principal
 	
 
 }
-int cabeçalho_registar() { //Cabeçalho menu de resgisto
+//! @brief Cabeçalho menu de resgisto
+void cabeçalho_registar() { 
 	
 	printf("*------------------------------------*\n");
 	printf("|               REGISTO              |\n");
 	printf("*------------------------------------*\n");
 
-	
-}
 
-void menu_login() { //Cabeçalho do menu de login
+}
+//! @brief Cabeçalho do menu de login
+void menu_login() { 
 
 
 	
@@ -502,7 +564,8 @@ void menu_login() { //Cabeçalho do menu de login
 		
 	
 }
-void menu_gestores() { //Cabeçalho do menu de gestores
+//! @brief Cabeçalho do menu de gestores
+void menu_gestores() { 
 
 	
 	printf("*---------------- MENU GESTORES ----------------*\n");
@@ -517,8 +580,8 @@ void menu_gestores() { //Cabeçalho do menu de gestores
 	printf("*-----------------------------------------------*\n");
 	
 }
-
-void menu_mastergestor() { //Cabeçalho do menu do gestor "Master"
+//! @brief Cabeçalho do menu do gestor "Master"
+void menu_mastergestor() { 
 	printf("*---------------- MENU GESTORES ----------------*\n");
 	printf("| 1.ADICIONAR GESTOR                            |\n");
 	printf("| 2.REMOVER GESTOR                              |\n");
@@ -529,7 +592,8 @@ void menu_mastergestor() { //Cabeçalho do menu do gestor "Master"
 
 
 }
-void menu_clientes() { //Cabeçalho do menu de clientes
+//! @brief Cabeçalho do menu de clientes
+void menu_clientes() { 
 	
 	printf("*---------------- MENU CLIENTES ----------------*\n");
 	printf("| 1.RESERVAR VEICULO                            |\n");
@@ -537,14 +601,13 @@ void menu_clientes() { //Cabeçalho do menu de clientes
 	printf("| 3.CARREGAR SALDO                              |\n");
 	printf("| 4.DEFINICOES                                  |\n");
 	printf("| 5.RESERVAS ATIVAS                             |\n");
-	printf("| 6.HISTORICO RESERVAS                          |\n");
 	printf("| 0.EXIT                                        |\n");
 	printf("*-----------------------------------------------*\n");
 	
 	
 }
-
-void menu_definicoes() { //Cabeçalho do menu de definições do clientes
+//! @brief Cabeçalho do menu de definições do clientes
+void menu_definicoes() { 
 
 	
 	printf("*---------------- DEFINICOES ----------------*\n");
@@ -554,20 +617,23 @@ void menu_definicoes() { //Cabeçalho do menu de definições do clientes
 	printf("*--------------------------------------------*\n");
 
 }
-
-void cabeçalho_admin() { //Cabeçalho Admin
+//! @brief Cabeçalho Admin
+void cabeçalho_admin() { 
 	printf("*------------------------------------*\n");
 	printf("|            ADMINISTRADOR           |\n");
 	printf("*------------------------------------*\n");
 }
-
-void cabeçalho_cliente() { //Cabeçalho clientes
+//! @brief Cabeçalho clientes
+void cabeçalho_cliente() { 
 	printf("*------------------------------------*\n");
 	printf("|               CLIENTE              |\n");
 	printf("*------------------------------------*\n");
 }
-
-int verificar_registo_clientes(Clientes* inicio, int NIF) { //Esta função percorre a lista ligada clientes e verifica se o NIF do cliente já se encontra lá
+//! @brief Esta função percorre a lista ligada clientes e verifica se o NIF do cliente já se encontra lá
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF NIF a verificar se existe no sistema
+//! @return 
+int verificar_registo_clientes(Clientes* inicio, int NIF) { 
 
 
 
@@ -581,8 +647,11 @@ int verificar_registo_clientes(Clientes* inicio, int NIF) { //Esta função percor
 	}
 	return 1;
 }
-
-int verificar_registo_veiculos(Veiculos* inicio, int codigo){ //Esta função percorre a lista ligada veiculos e verifica se o codigo do veiculo já se encontra lá
+//! @brief Esta função percorre a lista ligada veiculos e verifica se o codigo do veiculo já se encontra lá
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param codigo Codigo a verificar se existe no sistema
+//! @return 
+int verificar_registo_veiculos(Veiculos* inicio, int codigo){ 
 
 
 
@@ -596,8 +665,11 @@ int verificar_registo_veiculos(Veiculos* inicio, int codigo){ //Esta função perc
 	}
 	return 1;
 }
-
-int verificar_registo_gestores(Gestores* inicio, char email[]) { //Esta função percorre a lista ligada gestores e verifica se o email do gestor já se encontra lá
+//! @brief Esta função percorre a lista ligada gestores e verifica se o email do gestor já se encontra lá
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param email Email a verificar se existe no sistema
+//! @return 
+int verificar_registo_gestores(Gestores* inicio, char email[]) { 
 
 
 
@@ -611,8 +683,10 @@ int verificar_registo_gestores(Gestores* inicio, char email[]) { //Esta função p
 	}
 	return 1;
 }
-
-void AlterarDados(Clientes* inicio, int NIF_procurado) { //Esta função permite alterar os dados de um clientes, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
+//! @brief sta função permite alterar os dados de um clientes, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF_procurado NIF do utilizador a alterar os dados
+void AlterarDados(Clientes* inicio, int NIF_procurado) {
 
 	int opcao;
 	char novo_nome[50], nova_morada[50];
@@ -653,8 +727,12 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) { //Esta função permite a
 
 }
 
-
-int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) { //Esta função foi feita para a reserva de veiculos, a função percorre a lista ligada veiculos e verifica se nos parametros "reserva" e "NIF_reserva" os valores estão a zero, se sim, permite ao utilizador reservar esse veiculos, alterando esses parametros para 1 e o NIF do utilizador, respetivamente
+//! @brief Esta função foi feita para a reserva de veiculos, a função percorre a lista ligada veiculos e verifica se nos parametros "reserva" e "NIF_reserva" os valores estão a zero, se sim, permite ao utilizador reservar esse veiculos, alterando esses parametros para 1 e o NIF do utilizador, respetivamente
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF_reserva NIF do utilizador que vai reservar o veiculo
+//! @param code Codigo do veiculo a reservar
+//! @return 
+int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) { 
 
 
 
@@ -672,8 +750,11 @@ int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) { //Esta funçã
 		
 	}
 
-
-int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) { //Dado um codigo do veiculo, esta função percorre a lista e verifica se no parametro "NIF_reserva" o valor é o do NIF do utilizador, se sim ele cancela a reserva alterando os dados para 0
+//! @brief Dado um codigo do veiculo, esta função percorre a lista e verifica se no parametro "NIF_reserva" o valor é o do NIF do utilizador, se sim ele cancela a reserva alterando os dados para 0
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param NIF_reserva NIF do utilizador que reservou o veiculo e deseja cancelar a reserva
+//! @return 
+int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) { 
 
 	int code;
 	
@@ -698,14 +779,16 @@ int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) { //Dado um codigo do ve
 }
 
 
-
-void clear() { //Função que limpa tudo o que está antes no terminal
+//! @brief Função que limpa tudo o que está antes no terminal
+void clear() { 
 
 	system("@cls || clear");
 }
 
-
-int LocalizarVeiculos(Veiculos* inicio) { //Função que percorre a lista ligada veiculos e verifica o parametro localização, se o parametro contiver o mesmo conteudo do que o utilizador pediu, mostra somente essa localização
+//! @brief Função que percorre a lista ligada veiculos e verifica o parametro localização, se o parametro contiver o mesmo conteudo do que o utilizador pediu, mostra somente essa localização
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @return 
+int LocalizarVeiculos(Veiculos* inicio) { 
 
 	char localizacao_pretendida[TAM];
 
@@ -727,8 +810,10 @@ int LocalizarVeiculos(Veiculos* inicio) { //Função que percorre a lista ligada v
 
 	}
 }
-
-void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) { //Esta função permite alterar os dados de um gestor, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
+//! @brief Esta função permite alterar os dados de um gestor, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param email_procurado Email do gestor a alterar dados
+void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 	int opcao;
 	char novo_email[50], nova_password[50];
 	Gestores* current = inicio;
@@ -746,6 +831,7 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) { //Esta fun
 				if (strcmp(current->email, email_procurado) == 0) {
 					if (verificar_registo_gestores(current, novo_email)) {
 						strcpy(current->email, novo_email);
+						
 					}
 					
 				}

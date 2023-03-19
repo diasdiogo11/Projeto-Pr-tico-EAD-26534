@@ -69,7 +69,7 @@ Clientes* LerClientes();
 void GuardarClientes_Binario(Clientes* inicio);
 Clientes* LerClientes_Binario();
 void menu_principal();
-int cabeçalho_registar();
+void cabeçalho_registar();
 void menu_login();
 void menu_gestores();
 void menu_mastergestor();

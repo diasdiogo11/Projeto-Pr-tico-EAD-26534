@@ -115,6 +115,7 @@ void main() {
 
 							else if (opcao2 == 2) {
 								clear();
+								clientes = imprimir_clientes(clientes);
 								printf("NIF do utilizador a remover do sistema\n");
 								scanf("%d", &NIF_);
 								if (!verificar_registo_clientes(clientes, NIF_)){
@@ -165,6 +166,7 @@ void main() {
 							}
 							else if (opcao2 == 5) {
 								clear();
+								veiculos = imprimir_veiculos(veiculos);
 								printf("Codigo do veiculo a remover do sistema\n");
 								scanf("%d", &codigo);
 								if (!verificar_registo_veiculos(veiculos, codigo)) {
@@ -237,8 +239,18 @@ void main() {
 										clear();
 										printf("Qual o gestor a alterar dados\n");
 										scanf("%s", usuario);
-										AlterarDadosGestores(gestores, usuario);
-										GuardarGestores_Binario(gestores);
+										if (verificar_registo_gestores(gestores, email)) {
+											clear();
+											printf("1.ALTERAR EMAIL\n");
+											printf("2.ALTERAR PASSWORD\n");
+											AlterarDadosGestores(gestores, usuario);
+											GuardarGestores_Binario(gestores);
+											break;
+										}
+										else {
+											printf("Gestor nao registado no nosso sistema");
+										}
+										
 									}
 									
 								}
@@ -349,7 +361,7 @@ void main() {
 								}
 									
 								
-								break;
+								
 
 							}
 							else if (opcao3 == 4) {
@@ -361,10 +373,12 @@ void main() {
 								
 							}
 							else if (opcao3 == 5) {
+								clear();
 								veiculos = imprimir_reservas(veiculos, NIF);
 
 
 							}
+							
 						} while (opcao3 != 0);
 						
 
