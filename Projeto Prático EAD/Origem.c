@@ -13,12 +13,11 @@
 void main() {
 
 	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50];
-	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0;
+	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code;
 
 	Clientes* clientes = NULL;
 	Veiculos* veiculos = NULL;
 	Gestores* gestores = NULL;
-	Reservas* reservas = NULL;
 
 	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos_Binario();
@@ -291,14 +290,14 @@ void main() {
 									clear();
 									printf("Nao existem veiculos disponiveis nesta zona\n");
 								}
+								printf("Qual o codigo do veiculo\n");
+								scanf("%d", &code);
 								
-								
-								if (Reservar_Veiculo(veiculos,NIF)) {
+								if (Reservar_Veiculo(veiculos,NIF, code)) {
 									clear();
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
-									GuardarReservas(reservas);
 									printf("*--------------------------------------------*\n");
 									printf("|              DADOS ATUALIZADOS             |\n");
 									printf("|                 FACA LOGIN!                |\n");
@@ -364,13 +363,6 @@ void main() {
 							else if (opcao3 == 5) {
 								veiculos = imprimir_reservas(veiculos, NIF);
 
-
-							}
-							else if (opcao3 == 6) {
-
-								
-
-							
 
 							}
 						} while (opcao3 != 0);

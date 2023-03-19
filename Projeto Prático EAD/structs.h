@@ -40,14 +40,6 @@ typedef struct registo_veiculos {
 
 }Veiculos;
 
-typedef struct registo_chefe {
-	int NIF;
-	Veiculos* meio;
-	struct registo_chefe* seguinte;
-
-}Reservas;
-
-
 
 
 Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_, char morada_[], int saldo); //Inserção de novos clientes
@@ -68,7 +60,6 @@ void ordenação_veiculos(Veiculos* inicio);
 void ordenação_clientes(Clientes* inicio);
 void GuardarVeiculos(Veiculos* inicio);
 Veiculos* LerVeiculos();
-void GuardarReservas(Reservas* inicio);
 void GuardarVeiculos_Binario(Veiculos* inicio);
 Veiculos* LerVeiculos_Binario();
 void GuardarGestores_Binario(Gestores* inicio);
