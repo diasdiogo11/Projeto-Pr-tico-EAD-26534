@@ -81,8 +81,8 @@ void main() {
 				scanf("%s", password);
 				
 					if (login_gestores(gestores, usuario, password)) {
-						printf("Bem-vindo, %s!\n", usuario);
 						clear();
+						printf("Bem-vindo, %s!\n", usuario);
 						do {
 							menu_gestores();
 							scanf("%d", &opcao2);
@@ -235,6 +235,7 @@ void main() {
 										
 									}
 									else if (opcao6 == 3) {
+										clear();
 										printf("Qual o gestor a alterar dados\n");
 										scanf("%s", usuario);
 										AlterarDadosGestores(gestores, usuario);
@@ -243,6 +244,7 @@ void main() {
 									
 								}
 								else {
+									clear();
 									printf("ACESSO NAO AUTORIZADO\n");
 								}
 
@@ -265,6 +267,7 @@ void main() {
 				
 			}
 			else {
+				clear();
 				cabeçalho_cliente();
 				printf("NIF:\n");
 				scanf("%d", &NIF);
@@ -273,28 +276,38 @@ void main() {
 				gets(usuario);
 				
 				if (login_clientes(clientes, usuario, NIF)) {
+					clear();
 						printf("Bem vindo %s\n", usuario);
 						do {
 							menu_clientes();
 							scanf("%d", &opcao3);
 							if (opcao3 == 1) {
-
-
+								clear();
 								ordenação_veiculos(veiculos);
-								LocalizarVeiculos(veiculos);
+								if (LocalizarVeiculos(veiculos)) {
+									printf("%d %d %s %d %s\n", veiculos->codigo, veiculos->bateria, veiculos->localizacao, veiculos->custo, veiculos->tipo);
+								}
+								else {
+									clear();
+									printf("Nao existem veiculos disponiveis nesta zona\n");
+								}
+								
 								
 								if (Reservar_Veiculo(veiculos,NIF)) {
+									clear();
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									GuardarReservas(reservas);
 									printf("*--------------------------------------------*\n");
 									printf("|              DADOS ATUALIZADOS             |\n");
-									printf("|                 FACA LOGIN!!!              |\n");
+									printf("|                 FACA LOGIN!                |\n");
 									printf("*--------------------------------------------*\n");
 									break;
+									clear();
 								}
 								else {
+									clear();
 									printf("Veiculo indisponivel\n");
 
 								}
@@ -303,9 +316,14 @@ void main() {
 
 							}
 							else if (opcao3 == 2) {
+								clear();
 								if (Cancelar_Reserva(veiculos, NIF)) {
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
+									printf("*--------------------------------------------*\n");
+									printf("|              DADOS ATUALIZADOS             |\n");
+									printf("|                 FACA LOGIN!                |\n");
+									printf("*--------------------------------------------*\n");
 									break;
 								}
 								else {
@@ -318,11 +336,20 @@ void main() {
 								
 							}
 							else if (opcao3 == 3) {
-
-								clientes = saldo(clientes, NIF);
-								GuardarClientes_Binario(clientes);
-								GuardarClientes(clientes);
-								imprimir_clientes(clientes);
+								clear();
+								if (saldo(clientes, NIF)) {
+									GuardarClientes_Binario(clientes);
+									GuardarClientes(clientes);
+									clear();
+									printf("Saldo carregado com sucesso\n");
+									
+								}
+								else {
+									clear();
+									printf("Erro ao carregar saldo\n");
+								}
+									
+								
 								break;
 
 							}
@@ -352,6 +379,7 @@ void main() {
 
 					}
 					else {
+						clear();
 						printf("Nome de usuario ou NIF incorretos.\n");
 					}
 				
@@ -361,6 +389,7 @@ void main() {
 
 		}
 		else if (opcao == 0) {
+			clear();
 			printf("Obrigado pela sua visita...\n");
 
 		}

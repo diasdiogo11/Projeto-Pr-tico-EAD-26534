@@ -55,6 +55,44 @@ Clientes* imprimir_clientes(Clientes* inicio); //Imprime os clientes registados
 Clientes* remover_clientes(Clientes* inicio, int code); //Remove um cliente através do seu NIF
 Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[]); // Inserção de novos veiculos
 Veiculos* imprimir_veiculos(Veiculos* inicio); //Imprimie os veiculos disponiveis
+Veiculos* remover_veiculos(Veiculos* inicio, int code);
 Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]); //Inserção dos gestores
 int Reservar_Veiculo(Veiculos* inicio, Clientes* inicio1, int NIF_reserva);
 void Historico_reservas(Veiculos* inicio);
+Veiculos* imprimir_reservas(Veiculos* inicio, int NIF);
+Gestores* remover_gestores(Gestores* inicio, char email[]);
+int saldo(Clientes* inicio, int NIF_procurado);
+int login_gestores(Gestores* inicio, char* username, char* password);
+int login_clientes(Clientes* inicio, char* username, int* code[]);
+void ordenação_veiculos(Veiculos* inicio);
+void ordenação_clientes(Clientes* inicio);
+void GuardarVeiculos(Veiculos* inicio);
+Veiculos* LerVeiculos();
+void GuardarReservas(Reservas* inicio);
+void GuardarVeiculos_Binario(Veiculos* inicio);
+Veiculos* LerVeiculos_Binario();
+void GuardarGestores_Binario(Gestores* inicio);
+Gestores* LerGestores_Binario();
+void GuardarClientes(Clientes* inicio);
+Clientes* LerClientes();
+void GuardarClientes_Binario(Clientes* inicio);
+Clientes* LerClientes_Binario();
+void menu_principal();
+int cabeçalho_registar();
+void menu_login();
+void menu_gestores();
+void menu_mastergestor();
+void menu_clientes();
+void menu_definicoes();
+void cabeçalho_admin();
+void cabeçalho_cliente();
+int verificar_registo_clientes(Clientes* inicio, int NIF);
+int verificar_registo_veiculos(Veiculos* inicio, int codigo);
+int verificar_registo_gestores(Gestores* inicio, char email[]);
+void AlterarDados(Clientes* inicio, int NIF_procurado);
+int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva);
+int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva);
+void clear();
+int LocalizarVeiculos(Veiculos* inicio);
+void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
+

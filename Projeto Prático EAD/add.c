@@ -206,7 +206,7 @@ Gestores* remover_gestores(Gestores* inicio, char email[]) { //Dado uma lista li
 
 }
 
-Clientes* saldo(Clientes* inicio, int NIF_procurado){ //Função que dado o NIF de um utilizador, carrega o saldo no parametro saldo
+int saldo(Clientes* inicio, int NIF_procurado){ //Função que dado o NIF de um utilizador, carrega o saldo no parametro saldo
 
 	int valor;
 
@@ -218,15 +218,12 @@ Clientes* saldo(Clientes* inicio, int NIF_procurado){ //Função que dado o NIF de
 	for (current; current != NULL; current = current->proximo_cliente) {
 		if (NIF_procurado == current->NIF) {
 			current->saldo = current->saldo + valor;
-			return current;
+			return 1;
 		}
-		
-		
-}
-	return inicio;
-
-
 	
+}
+	return 0;
+
 }
 
 int login_gestores(Gestores* inicio, char* username, char* password) { //Esta função percorre a lista ligada de gestores, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
@@ -650,6 +647,8 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 		for (current; current != NULL; current = current->proximo_cliente) {
 			if (NIF_procurado == current->NIF) {
 				strcpy(current->nome, novo_nome);
+				clear();
+				printf("Dados atualizados com sucesso\n");
 			}
 		
 		}
@@ -661,6 +660,7 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 		for (current; current != NULL; current = current->proximo_cliente) {
 			if (NIF_procurado == current->NIF) {
 				strcpy(current->morada, nova_morada);
+				clear();
 			}
 			
 		}
@@ -724,21 +724,24 @@ void clear() {
 }
 
 
-Veiculos* LocalizarVeiculos(Veiculos* inicio) {
+int LocalizarVeiculos(Veiculos* inicio) {
 
 	char localizacao_pretendida[TAM];
 
 	Veiculos* current = inicio;
 	
 	scanf("%*c");
-	printf("Onde deseja encontrar veiculos?\n");
+	printf("Onde deseja encontrar veiculos disponiveis?\n");
 	gets(localizacao_pretendida);
 
 	for (current; current != NULL; current = current->proximo_veiculo) {
 
-		if ((strcmp(current->localizacao, localizacao_pretendida) == 0)) {
-			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+		if ((strcmp(current->localizacao, localizacao_pretendida) == 0) && current->reserva == 0 && current->NIF_reserva == 0) {
+			return 1;
 			 
+		}
+		else {
+			return 0;
 		}
 
 	}
