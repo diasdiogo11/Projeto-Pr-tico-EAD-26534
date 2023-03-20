@@ -1,4 +1,5 @@
-1234;Diogo;17;Rua das Mos;0
-1;Diogo;19;Rua das Mos;100
-2;Diogo;16;Rua das Ruas;40
+11;Joao;28;Rua das Mos;0
 147896325;Joao;28;Rua das Nozes;0
+2;Diogo;16;Rua das Ruas;40
+1;Diogo;19;Rua das Mos;100
+1234;Diogo;17;Rua das Mos;0

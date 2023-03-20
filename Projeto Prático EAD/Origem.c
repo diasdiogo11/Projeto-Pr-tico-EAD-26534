@@ -245,6 +245,10 @@ void main() {
 											printf("2.ALTERAR PASSWORD\n");
 											AlterarDadosGestores(gestores, usuario);
 											GuardarGestores_Binario(gestores);
+											printf("*--------------------------------------------*\n");
+											printf("|              DADOS ATUALIZADOS             |\n");
+											printf("|                 FACA LOGIN!                |\n");
+											printf("*--------------------------------------------*\n");
 											break;
 										}
 										else {
@@ -369,11 +373,14 @@ void main() {
 								AlterarDados(clientes, NIF);
 								GuardarClientes_Binario(clientes);
 								GuardarClientes(clientes);
-								
+								printf("*--------------------------------------------*\n");
+								printf("|              DADOS ATUALIZADOS             |\n");
+								printf("|                 FACA LOGIN!                |\n");
+								printf("*--------------------------------------------*\n");
+								break;
 								
 							}
 							else if (opcao3 == 5) {
-								clear();
 								veiculos = imprimir_reservas(veiculos, NIF);
 
 
