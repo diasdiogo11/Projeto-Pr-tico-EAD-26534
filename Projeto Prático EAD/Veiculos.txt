@@ -1,6 +1,2 @@
-2;74;segseg;4;segseg;1;1
-9;45;Porto;7;Trotinete;1;1
-15;45;Refojos De Riba D ave;2;Carro;1;1234
-11;42;esgesg;4;segsg;1;11
-8;15;segsge;5;segsge;1;11
-7;10;seseg;4;segsg;1;11
+1;100;sgseg;5;seggesg;0;0
+2;75;segsge;4;segsg;0;0

@@ -38,7 +38,7 @@ void main() {
 			cabeçalho_registar();
 			printf("NIF:\n");
 			scanf("%d", &NIF);
-			if (verificar_registo_clientes(clientes, NIF)) {
+			if (!verificar_registo_clientes(clientes, NIF)) {
 				scanf("%*c");
 				printf("Nome:\n");
 				gets(nome);
@@ -91,7 +91,7 @@ void main() {
 								clear();
 								printf("NIF:\n");
 								scanf("%d", &NIF);
-								if (verificar_registo_clientes(clientes, NIF)) {
+								if (!verificar_registo_clientes(clientes, NIF)) {
 									scanf("%*c");
 									printf("Nome:\n");
 									gets(nome);
@@ -115,14 +115,12 @@ void main() {
 
 							else if (opcao2 == 2) {
 								clear();
-								clientes = imprimir_clientes(clientes);
 								printf("NIF do utilizador a remover do sistema\n");
 								scanf("%d", &NIF_);
-								if (!verificar_registo_clientes(clientes, NIF_)){
+								if (verificar_registo_clientes(clientes, NIF_)){
 									clientes = remover_clientes(clientes, NIF_);
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
-									clear();
 									printf("Utilizador removido com sucesso\n");
 								}
 								else {
@@ -142,7 +140,7 @@ void main() {
 								clear();
 								printf("Codigo:\n");
 								scanf("%d", &codigo);
-								if (verificar_registo_veiculos(veiculos, codigo)) {
+								if (!verificar_registo_veiculos(veiculos, codigo)) {
 									printf("Bateria:\n");
 									scanf("%d", &bateria);
 									scanf("%*c");
@@ -169,7 +167,7 @@ void main() {
 								veiculos = imprimir_veiculos(veiculos);
 								printf("Codigo do veiculo a remover do sistema\n");
 								scanf("%d", &codigo);
-								if (!verificar_registo_veiculos(veiculos, codigo)) {
+								if (verificar_registo_veiculos(veiculos, codigo)) {
 									veiculos = remover_veiculos(veiculos, codigo);
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
@@ -197,7 +195,7 @@ void main() {
 										clear();
 										printf("Digite o email do novo gestor\n");
 										scanf("%s", email);
-										if (verificar_registo_gestores(gestores, email)) {
+										if (!verificar_registo_gestores(gestores, email)) {
 											printf("Digite a password do novo gestor\n");
 											scanf("%s", password);
 											gestores = inserir_gestores(gestores, email, password);

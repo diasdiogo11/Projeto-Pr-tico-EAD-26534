@@ -639,13 +639,13 @@ int verificar_registo_clientes(Clientes* inicio, int NIF) {
 
 	for (inicio; inicio != NULL; inicio = inicio->proximo_cliente) {
 		if (inicio->NIF == NIF) {
-			return 0;
+			return 1;
 		}
 		
 			
 		
 	}
-	return 1;
+	return 0;
 }
 //! @brief Esta função percorre a lista ligada veiculos e verifica se o codigo do veiculo já se encontra lá
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
@@ -657,13 +657,13 @@ int verificar_registo_veiculos(Veiculos* inicio, int codigo){
 
 	for (inicio; inicio != NULL; inicio = inicio->proximo_veiculo) {
 		if (inicio->codigo == codigo){
-			return 0;
+			return 1;
 		}
 
 
 
 	}
-	return 1;
+	return 0;
 }
 //! @brief Esta função percorre a lista ligada gestores e verifica se o email do gestor já se encontra lá
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
@@ -675,13 +675,13 @@ int verificar_registo_gestores(Gestores* inicio, char email[]) {
 
 	for (inicio; inicio != NULL; inicio = inicio->proximo_gestor) {
 		if (strcmp(inicio->email, email) == 0) {
-			return 0;
+			return 1;
 		}
 
 
 
 	}
-	return 1;
+	return 0;
 }
 //! @brief sta função permite alterar os dados de um clientes, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
@@ -770,12 +770,11 @@ int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) {
 			current->NIF_reserva = 0;
 			return 1;
 		}
-		else if (current->reserva == 0 && current->NIF_reserva == 0) {
-			return 0;
-		}
+		
 	
 		
 	}
+	return 0;
 }
 
 
