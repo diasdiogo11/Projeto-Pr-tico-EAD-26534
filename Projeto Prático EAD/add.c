@@ -803,18 +803,19 @@ int LocalizarVeiculos(Veiculos* inicio) {
 			return 1;
 			 
 		}
-		else {
-			return 0;
-		}
+		
+			
+		
 
 	}
+	return 0;
 }
 //! @brief Esta função permite alterar os dados de um gestor, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param email_procurado Email do gestor a alterar dados
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 	int opcao;
-	char novo_email[50], nova_password[50];
+	char novo_email[50], novapassword[50];
 	Gestores* current = inicio;
 
 
@@ -830,7 +831,7 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 				if (strcmp(current->email, email_procurado) == 0) {
 					if (verificar_registo_gestores(current, novo_email)) {
 						strcpy(current->email, novo_email);
-						
+						GuardarGestores_Binario(inicio);
 					}
 					
 				}
@@ -841,10 +842,11 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 	else if (opcao == 2) {
 		scanf("%*c");
 		printf("Digite a sua nova password\n");
-		gets(nova_password);
+		gets(novapassword);
 		for (current; current != NULL; current = current->proximo_gestor) {
 			if (strcmp(current->email, email_procurado) == 0) {
-				strcpy(current->password, nova_password);
+				strcpy(current->password, novapassword);
+				GuardarGestores_Binario(inicio);
 			}
 
 		}

@@ -1,2 +1,1 @@
-2;Joao;45;Rua do Peso;0
-1;Diogo;19;Rua das Mos;0
+1234;diogo1;19;Rua das Mos;20

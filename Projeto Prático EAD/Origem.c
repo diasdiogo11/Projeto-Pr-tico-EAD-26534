@@ -214,8 +214,8 @@ void main() {
 										clear();
 										printf("Digite o email do gestor a remover do sistema\n");
 										scanf("%s", email);
-										if (!verificar_registo_gestores(gestores, email)) {
-											if (strcmp(gestores->email, usuario) == 1) {
+										if (verificar_registo_gestores(gestores, email)) {
+											if (strcmp(gestores->email, email) == 0) {
 												gestores = remover_gestores(gestores, email);
 												GuardarGestores_Binario(gestores);
 												clear();
@@ -236,13 +236,13 @@ void main() {
 									else if (opcao6 == 3) {
 										clear();
 										printf("Qual o gestor a alterar dados\n");
-										scanf("%s", usuario);
+										scanf("%s", email);
 										if (verificar_registo_gestores(gestores, email)) {
 											clear();
 											printf("1.ALTERAR EMAIL\n");
 											printf("2.ALTERAR PASSWORD\n");
-											AlterarDadosGestores(gestores, usuario);
-											GuardarGestores_Binario(gestores);
+											AlterarDadosGestores(gestores, email);
+											
 											printf("*--------------------------------------------*\n");
 											printf("|              DADOS ATUALIZADOS             |\n");
 											printf("|                 FACA LOGIN!                |\n");
@@ -250,7 +250,7 @@ void main() {
 											break;
 										}
 										else {
-											printf("Gestor nao registado no nosso sistema");
+											printf("Gestor nao registado no nosso sistema\n");
 										}
 										
 									}
@@ -307,7 +307,7 @@ void main() {
 								printf("Qual o codigo do veiculo\n");
 								scanf("%d", &code);
 								
-								if (Reservar_Veiculo(veiculos,NIF, code)) {
+								if (Reservar_Veiculo(veiculos, NIF, code)) {
 									clear();
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
