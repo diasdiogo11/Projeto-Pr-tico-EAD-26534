@@ -84,6 +84,6 @@ void AlterarDados(Clientes* inicio, int NIF_procurado);
 int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva);
 int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva);
 void clear();
-int LocalizarVeiculos(Veiculos* inicio);
+Veiculos* LocalizarVeiculos(Veiculos* inicio);
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
 

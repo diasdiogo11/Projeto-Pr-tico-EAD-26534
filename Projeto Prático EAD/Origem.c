@@ -12,7 +12,7 @@
 
 void main() {
 
-	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50];
+	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50];
 	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code;
 
 	Clientes* clientes = NULL;
@@ -171,7 +171,6 @@ void main() {
 									veiculos = remover_veiculos(veiculos, codigo);
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
-									clear();
 									printf("Veiculo removido com sucesso\n");
 								
 								}
@@ -297,13 +296,13 @@ void main() {
 							if (opcao3 == 1) {
 								clear();
 								ordenação_veiculos(veiculos);
-								if (LocalizarVeiculos(veiculos)) {
-									printf("%d %d %s %d %s\n", veiculos->codigo, veiculos->bateria, veiculos->localizacao, veiculos->custo, veiculos->tipo);
-								}
-								else {
-									clear();
-									printf("Nao existem veiculos disponiveis nesta zona\n");
-								}
+								
+
+
+								scanf("%*c");
+								printf("Onde deseja encontrar veiculos disponiveis?\n");
+								gets(localizacao_pretendida);
+								LocalizarVeiculos(veiculos, localizacao_pretendida);
 								printf("Qual o codigo do veiculo\n");
 								scanf("%d", &code);
 								

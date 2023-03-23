@@ -450,11 +450,13 @@ Gestores* LerGestores_Binario()
 		while (fread(&current, sizeof(Gestores), 1, fp) == 1)
 		{
 			aux = inserir_gestores(aux, current.email, current.password);
-		fclose(fp);
+		
 	}
-	return aux;
+		fclose(fp);
+	
 
 }
+	return aux;
 }
 //! @brief Esta função guarda os dados presentes na lista ligada num ficheiro de texto, com o nome "Clientes"
 //! @param inicio 
@@ -787,35 +789,25 @@ void clear() {
 //! @brief Função que percorre a lista ligada veiculos e verifica o parametro localização, se o parametro contiver o mesmo conteudo do que o utilizador pediu, mostra somente essa localização
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @return 
-int LocalizarVeiculos(Veiculos* inicio) { 
+Veiculos* LocalizarVeiculos(Veiculos* inicio, char localizacao_pretendida[]) {
 
-	char localizacao_pretendida[TAM];
-
-	Veiculos* current = inicio;
 	
-	scanf("%*c");
-	printf("Onde deseja encontrar veiculos disponiveis?\n");
-	gets(localizacao_pretendida);
-
-	for (current; current != NULL; current = current->proximo_veiculo) {
-
-		if ((strcmp(current->localizacao, localizacao_pretendida) == 0) && current->reserva == 0 && current->NIF_reserva == 0) {
-			return 1;
-			 
-		}
-		
+		for(inicio; inicio != NULL; inicio = inicio->proximo_veiculo){
+			if ((strcmp(inicio->localizacao, localizacao_pretendida) == 0) && inicio->reserva == 0 && inicio->NIF_reserva == 0) {
+				printf("%d %d %s %d %s\n", inicio->codigo, inicio->bateria, inicio->localizacao, inicio->custo, inicio->tipo);
+				
+			}
 			
-		
+		}
+	
 
-	}
-	return 0;
 }
 //! @brief Esta função permite alterar os dados de um gestor, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param email_procurado Email do gestor a alterar dados
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 	int opcao;
-	char novo_email[50], novapassword[50];
+	char novoemail[50], novapassword[50];
 	Gestores* current = inicio;
 
 
@@ -825,14 +817,15 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 	if (opcao == 1) {
 		scanf("%*c");
 		printf("Digite o novo email\n");
-		gets(novo_email);
+		gets(novoemail);
 		
 			for (current; current != NULL; current = current->proximo_gestor) {
 				if (strcmp(current->email, email_procurado) == 0) {
-					if (verificar_registo_gestores(current, novo_email)) {
-						strcpy(current->email, novo_email);
-						GuardarGestores_Binario(inicio);
-					}
+					strcpy(current->email, novoemail);
+					GuardarGestores_Binario(inicio);
+
+						
+					
 					
 				}
 			}

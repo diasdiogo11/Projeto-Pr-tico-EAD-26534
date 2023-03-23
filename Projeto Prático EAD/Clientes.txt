@@ -1,1 +1,1 @@
-1234;diogo1;19;Rua das Mos;20
+1234;Diogo;19;Rua;0
