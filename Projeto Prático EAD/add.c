@@ -309,15 +309,29 @@ void ordenação_veiculos(Veiculos* inicio) {
 
 	Veiculos* pi = inicio;
 	Veiculos* pj = NULL;
-	int aux;
+	int aux, aux1, aux2;
+	char loca[50], tipo[50];
 
 
 	for (pi; pi != NULL; pi = pi->proximo_veiculo) {
 		for (pj = pi->proximo_veiculo; pj != NULL; pj = pj->proximo_veiculo) {
-			if (pi->bateria < pj->bateria ) {
+			if (pi->bateria < pj->bateria) {
 				aux = pi->bateria;
 				pi->bateria = pj->bateria;
 				pj->bateria = aux;
+				aux1 = pi->codigo;
+				pi->codigo = pj->codigo;
+				pj->codigo = aux1;
+				aux2 = pi->custo;
+				pi->custo = pj->custo;
+				pj->custo = aux2;
+				strcpy(loca, pi->localizacao);
+				strcpy(pi->localizacao, pj->localizacao);
+				strcpy(pj->localizacao, loca);
+				strcpy(tipo, pi->tipo);
+				strcpy(pi->tipo, pj->tipo);
+				strcpy(pj->tipo, tipo);
+				
 			}
 		}
 	}
