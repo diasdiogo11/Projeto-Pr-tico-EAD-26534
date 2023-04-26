@@ -1,1 +1,3 @@
-1234;Diogo;19;Rua;0
+1234;Diogo;19;Rua;60
+1;Joao;14;sefgs;20
+7;ana;78;hd;20

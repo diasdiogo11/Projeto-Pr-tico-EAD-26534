@@ -261,6 +261,10 @@ void main() {
 								}
 
 							}
+							else if (opcao2 == 8) {
+								criarmatriz(veiculos);
+								GuardarVeiculos(veiculos);
+							}
 						} while (opcao2 != 0);
 					}
 					
@@ -306,7 +310,7 @@ void main() {
 								printf("Qual o codigo do veiculo\n");
 								scanf("%d", &code);
 								
-								if (Reservar_Veiculo(veiculos, NIF, code)) {
+								if (Reservar_Veiculo(veiculos,NIF, code)) {
 									clear();
 									printf("Reserva bem sucedida\n");
 									GuardarVeiculos_Binario(veiculos);
@@ -329,7 +333,11 @@ void main() {
 							}
 							else if (opcao3 == 2) {
 								clear();
-								if (Cancelar_Reserva(veiculos, NIF)) {
+								int code;
+
+								printf("Qual o codigo do veiculo\n");
+								scanf("%d", &code);
+								if (Cancelar_Reserva(veiculos,clientes, NIF, code)) {
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									printf("*--------------------------------------------*\n");

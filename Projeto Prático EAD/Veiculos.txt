@@ -1,8 +1,4 @@
-8888;73;Atum;4;Atum1;0;0
-1111;87;Santo Tirso;8;Bicicleta;0;0
-8;75;Porto;5;bfs;0;0
-3;100;Barcelos;4;Board;0;0
-2;85;Porto;4;Trotinete;0;0
-1;75;Barcelos;5;Bicicleta;0;0
-12354;89;suygsg;5;segs;0;0
-1234;65;Refojos;5;esgsg;0;0
+1;1;drgdr;5;drhhd;0;0
+2;5;fsef;4;segsg;1;7
+3;6;segseg;8;segsg;1;1234
+4;85;segsg;4;segsegs;0;0

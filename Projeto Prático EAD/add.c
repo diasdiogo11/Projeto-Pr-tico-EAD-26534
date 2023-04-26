@@ -116,6 +116,33 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 
 }
 
+void criarmatriz(Veiculos* inicio) {
+
+	int count = 0, i, j, G[50][50];
+	while (inicio != NULL) {
+
+		count++;
+		inicio = inicio->proximo_veiculo;
+	}
+
+	printf("\nEnter the adjacency matrix:\n");
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+			scanf("%d", &G[i][j]);
+	FILE* fp;
+	fp = fopen("matriz.txt", "w");
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 3; j++) {
+			fprintf(fp, "%d", G[i][j]);
+		}
+		fprintf(fp, "\n");
+	}
+	fclose(fp);
+	return 0;
+}
+
+
+
 //! @brief Função que imprime os dados inseridos na lista ligada para os veiculos anteriormente criada
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @return 
@@ -748,48 +775,55 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 //! @param NIF_reserva NIF do utilizador que vai reservar o veiculo
 //! @param code Codigo do veiculo a reservar
 //! @return 
-int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) { 
-
-
-
+int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) {
 	Veiculos* current = inicio;
 
-	for (current; current != NULL; current = current->proximo_veiculo) {
+
+	for(current; current != NULL; current = current->proximo_veiculo){
 		if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0) {
-			
 			current->reserva = 1;
 			current->NIF_reserva = NIF_reserva;
 			return 1;
-		}
-	}
+					
+				}
+				
+			}
+
 	return 0;
-		
-	}
+}
 
 //! @brief Dado um codigo do veiculo, esta função percorre a lista e verifica se no parametro "NIF_reserva" o valor é o do NIF do utilizador, se sim ele cancela a reserva alterando os dados para 0
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param NIF_reserva NIF do utilizador que reservou o veiculo e deseja cancelar a reserva
 //! @return 
-int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) { 
+int Cancelar_Reserva(Veiculos* inicio,Clientes* cliente, int NIF_reserva, int code) { 
 
-	int code;
 	
-	printf("Qual o codigo do veiculo\n");
-	scanf("%d", &code);
 
 	Veiculos* current = inicio;
+	Clientes* current1 = cliente;
+	for (current1; current1 != NULL; current1 = current1->proximo_cliente) {
+		if (current1->NIF == NIF_reserva) {
+			for (current; current != NULL; current = current->proximo_veiculo) {
+				if (current->reserva == 1 && current->codigo == code && current->NIF_reserva == NIF_reserva) {
+					printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+					current->reserva = 0;
+					current->NIF_reserva = 0;
 
-	for (current; current != NULL; current = current->proximo_veiculo) {
-		if (current->reserva == 1 && current->codigo == code && current->NIF_reserva == NIF_reserva) {
-			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
-			current->reserva = 0;
-			current->NIF_reserva = 0;
-			return 1;
+					current1->saldo = current1->saldo + 30;
+
+					return 1;
+				}
 		}
+	
+	
 		
 	
 		
 	}
+	
+
+}
 	return 0;
 }
 

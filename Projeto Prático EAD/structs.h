@@ -49,7 +49,7 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 Veiculos* imprimir_veiculos(Veiculos* inicio); //Imprimie os veiculos disponiveis
 Veiculos* remover_veiculos(Veiculos* inicio, int code);
 Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]); //Inserção dos gestores
-int Reservar_Veiculo(Veiculos* inicio, Clientes* inicio1, int NIF_reserva);
+int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code);
 void Historico_reservas(Veiculos* inicio);
 Veiculos* imprimir_reservas(Veiculos* inicio, int NIF);
 Gestores* remover_gestores(Gestores* inicio, char email[]);
@@ -81,8 +81,7 @@ int verificar_registo_clientes(Clientes* inicio, int NIF);
 int verificar_registo_veiculos(Veiculos* inicio, int codigo);
 int verificar_registo_gestores(Gestores* inicio, char email[]);
 void AlterarDados(Clientes* inicio, int NIF_procurado);
-int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva);
-int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva);
+int Cancelar_Reserva(Veiculos* inicio,Clientes* inicio1, int NIF_reserva);
 void clear();
 Veiculos* LocalizarVeiculos(Veiculos* inicio);
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
